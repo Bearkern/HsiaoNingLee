@@ -10,12 +10,16 @@ const routes = [
         component: () => import('../views/Painter.vue'),
       },
       {
-        path: 'collections',
-        component: () => import('../views/Collections.vue'),
+        path: 'paintings',
+        component: () => import('../views/Paintings.vue'),
       },
       {
         path: 'painting/:paintingId',
         component: () => import('../views/Painting.vue'),
+      },
+      {
+        path: 'collections',
+        component: () => import('../views/Collections.vue'),
       },
       {
         path: 'checkCollections/:collectionId',

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <ToastMessage></ToastMessage>
       <router-link class="navbar-brand" to="/admin">畫作管理</router-link>

@@ -15,6 +15,7 @@
           <th>畫作名稱</th>
           <th>畫作</th>
           <th width="120">年份</th>
+          <th width="120">單位</th>
           <th width="120">尺寸</th>
           <th width="120">售價</th>
           <th width="100">是否啟用</th>
@@ -28,6 +29,7 @@
           <td>{{ painting.title }}</td>
           <td><img :src="painting.imageUrl" style="height: 100px" alt="" /></td>
           <td>{{ painting.year }}</td>
+          <td>{{ painting.unit }}</td>
           <td class="text-right">{{ painting.size }}</td>
           <td class="text-right">{{ painting.price }}</td>
           <td>

@@ -1,6 +1,7 @@
 <template>
   <div class="container p-0">
     <Loading :active="isLoading" :z-index="1060"></Loading>
+
     <div class="pt-7">
       <table class="table align-middle">
         <thead>
@@ -15,7 +16,7 @@
           <tr v-for="painting in paintings" :key="painting.id">
             <td style="width: 200px">
               <div
-                style="height: 100px; background-size: cover; background-position: center"
+                style="height: 100px; background-size: cover; background-position: center center"
                 :style="{ backgroundImage: `url(${painting.imageUrl})` }"
               ></div>
             </td>
@@ -108,7 +109,7 @@
 
     <div class="my-5 row justify-content-center">
       <Form ref="collectionForm" class="col-md-6" v-slot="{ errors }" @submit="sendCollections">
-      <h2>請填寫收藏者資訊</h2>
+        <h2>請填寫收藏者資訊</h2>
         <div class="mb-3">
           <label for="name" class="form-label">姓名</label>
           <Field

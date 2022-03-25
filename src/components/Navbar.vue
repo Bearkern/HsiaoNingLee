@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/collections">水彩畫作</router-link>
+            <router-link class="nav-link" to="/paintings">水彩創作</router-link>
           </li>
         </ul>
         <ul class="navbar-nav nav-functions d-inline-block">
@@ -26,7 +26,7 @@
             >登入</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin"
+            <router-link class="nav-link" to="/collections"
               ><i class="bi bi-collection-fill fs-3 me-3"></i
             >畫作收藏</router-link>
           </li>
