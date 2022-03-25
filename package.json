@@ -16,6 +16,7 @@
     "bootstrap-icons": "^1.8.1",
     "core-js": "^3.6.5",
     "mitt": "^3.0.0",
+    "swiper": "^8.0.7",
     "vee-validate": "^4.5.10",
     "vue": "^3.0.0",
     "vue-axios": "^3.4.1",
@@ -33,7 +34,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^7.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2"
   }
 }

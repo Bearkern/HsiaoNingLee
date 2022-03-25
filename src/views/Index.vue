@@ -1,15 +1,17 @@
 <template>
+  <div class="container">
   <Navbar></Navbar>
-  <div class="container-fluid mt-3 position-relative">
     <ToastMessage></ToastMessage>
     <router-view />
+  <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
-import emitter from '@/utilities/mitt';
 import ToastMessage from '@/components/ToastMessage.vue';
+import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
+import emitter from '@/utilities/mitt';
 
 export default {
   provide() {
@@ -19,6 +21,7 @@ export default {
   },
   components: {
     Navbar,
+    Footer,
     ToastMessage,
   },
 };

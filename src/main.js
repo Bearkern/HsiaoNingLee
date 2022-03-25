@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import Loading from 'vue-loading-overlay';

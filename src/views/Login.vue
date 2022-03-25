@@ -1,7 +1,7 @@
 <template>
-  <div class="container mt-5">
+  <div class="container py-7">
     <Loading :active="isLoading" :z-index="1060"></Loading>
-    <div class="my-5 row justify-content-center">
+    <div class="row justify-content-center">
       <Form class="col-md-6" v-slot="{ errors }" @submit="login">
         <div class="mb-2">
           <label for="email" class="form-label">帳號</label>

@@ -45,6 +45,10 @@
             <td>{{ appointment.user.address }}</td>
           </tr>
           <tr>
+            <th>提供可聯繫時間</th>
+            <td>{{ appointment.user.address }}</td>
+          </tr>
+          <tr>
             <th>預約狀態</th>
             <td>
               <span v-if="!appointment.is_paid">尚未預約</span>
@@ -53,6 +57,7 @@
           </tr>
         </tbody>
       </table>
+      ＊預約後三日內會有專人聯繫(不含例假日)。
       <div class="text-end" v-if="appointment.is_paid === false">
         <button class="btn btn-danger" type="submit">確認預約畫作</button>
       </div>

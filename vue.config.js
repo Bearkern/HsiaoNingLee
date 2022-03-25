@@ -15,4 +15,11 @@ module.exports = {
       msTileImage: 'favicon.ico',
     },
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: '@import "@/assets/stylesheets/all.scss";',
+      },
+    },
+  },
 };

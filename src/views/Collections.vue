@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container p-0">
     <Loading :active="isLoading" :z-index="1060"></Loading>
-    <div class="mt-4">
+    <div class="pt-7">
       <table class="table align-middle">
         <thead>
           <tr>
@@ -108,8 +108,9 @@
 
     <div class="my-5 row justify-content-center">
       <Form ref="collectionForm" class="col-md-6" v-slot="{ errors }" @submit="sendCollections">
+      <h2>請填寫收藏者資訊</h2>
         <div class="mb-3">
-          <label for="name" class="form-label">收件人姓名</label>
+          <label for="name" class="form-label">姓名</label>
           <Field
             id="name"
             name="姓名"
@@ -139,7 +140,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="tel" class="form-label">收件人電話</label>
+          <label for="tel" class="form-label">電話</label>
           <Field
             id="tel"
             name="電話"
@@ -154,7 +155,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="address" class="form-label">收件人地址</label>
+          <label for="address" class="form-label">地址</label>
           <Field
             id="address"
             name="地址"

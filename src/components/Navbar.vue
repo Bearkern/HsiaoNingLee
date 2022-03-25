@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+  <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed">
+    <div class="container">
       <router-link class="navbar-brand" to="/">李曉寧水彩畫家</router-link>
       <button
         class="navbar-toggler"
@@ -13,16 +13,37 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/collections">畫作收藏</router-link>
+            <router-link class="nav-link" to="/collections">水彩畫作</router-link>
+          </li>
+        </ul>
+        <ul class="navbar-nav nav-functions d-inline-block">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/admin"
+              ><i class="bi bi-person-circle fs-3 px-3"></i
+            >登入</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin">後台管理</router-link>
+            <router-link class="nav-link" to="/admin"
+              ><i class="bi bi-collection-fill fs-3 me-3"></i
+            >畫作收藏</router-link>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
+
+<style lang="scss" scoped>
+.index-navbar {
+  width: 100%;
+  max-width: 1296px;
+  z-index: 10;
+  background-color: $martinique;
+}
+.nav-functions li {
+  display: inline-block;
+}
+</style>
