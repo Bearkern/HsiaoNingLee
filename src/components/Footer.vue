@@ -8,7 +8,7 @@
       </div>
 
       <div class="col-md-6 d-flex align-items-center justify-content-center">
-        <span class="text-white"> 個人作品網站，非商業用途 ｜ 資料來源：李曉寧水彩畫家 </span>
+        <span class="text-white">個人作品網站，非商業用途 ｜ 圖文授權：李曉寧老師</span>
         <a
           href="https://www.facebook.com/leehsiaolin"
           class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1"

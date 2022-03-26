@@ -1,25 +1,25 @@
 <template>
-  <div class="container">
+  <div class="container pt-6">
     <Loading :active="isLoading" :z-index="1060"></Loading>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link to="/collections">畫作收藏</router-link>
+          <router-link to="/paintings">水彩創作</router-link>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ painting.title }}</li>
       </ol>
     </nav>
     <div class="row justify-content-center">
       <article class="col-8">
-        <h2>{{ product.title }}</h2>
-        <div>{{ product.content }}</div>
-        <div>{{ product.description }}</div>
-        <img :src="product.imageUrl" class="img-fluid mb-3" />
+        <h2>{{ painting.title }}</h2>
+        <div>{{ painting.content }}</div>
+        <div>{{ painting.description }}</div>
+        <img :src="painting.imageUrl" class="img-fluid mb-3" />
       </article>
       <div class="col-4">
-        <div class="h5">畫作年份：</div>
+        <div class="h5">畫作年份：{{ painting.year }}</div>
         <hr />
-        <button type="button" class="btn btn-outline-danger" @click="addToCollection(product.id)">
+        <button type="button" class="btn btn-outline-danger" @click="addToCollection(painting.id)">
           加入收藏
         </button>
       </div>
@@ -33,7 +33,7 @@ export default {
     return {
       isLoading: false,
       id: '',
-      product: {},
+      painting: {},
     };
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
       this.$http
         .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`)
         .then((res) => {
-          this.product = res.data.product;
+          this.painting = res.data.product;
           this.isLoading = false;
         })
         .catch((res) => {

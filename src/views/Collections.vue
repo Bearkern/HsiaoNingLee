@@ -1,62 +1,7 @@
 <template>
-  <div class="container p-0">
+  <div class="container min-vh-100 pt-7">
     <Loading :active="isLoading" :z-index="1060"></Loading>
-
-    <div class="pt-7">
-      <table class="table align-middle">
-        <thead>
-          <tr>
-            <th>畫作</th>
-            <th>畫作名稱</th>
-            <th>年份</th>
-            <th>功能</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="painting in paintings" :key="painting.id">
-            <td style="width: 200px">
-              <div
-                style="height: 100px; background-size: cover; background-position: center center"
-                :style="{ backgroundImage: `url(${painting.imageUrl})` }"
-              ></div>
-            </td>
-            <td>
-              <a href="#" class="text-dark">{{ painting.title }}</a>
-            </td>
-            <td>
-              <div class="h5">{{ painting.year }}</div>
-            </td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
-                  @click="getPainting(painting.id)"
-                >
-                  <span
-                    class="spinner-border spinner-grow-sm"
-                    v-if="state.paintingLoading === painting.id"
-                  ></span>
-                  畫作細節
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-danger"
-                  :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
-                  @click="addToCollection(painting.id)"
-                >
-                  <span
-                    class="spinner-border spinner-grow-sm"
-                    v-if="state.paintingLoading === painting.id"
-                  ></span>
-                  加到收藏
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div v-if="collections.carts.length">
       <div class="text-end">
         <button class="btn btn-outline-danger" type="button" @click="removeCollections">
           清空收藏
@@ -106,9 +51,18 @@
         </tbody>
       </table>
     </div>
+    <div v-else class="pb-5">
+      您目前沒有收藏任何畫作
+      <router-link class="btn btn-secondary" to="/paintings">前往收藏</router-link>
+    </div>
 
-    <div class="my-5 row justify-content-center">
-      <Form ref="collectionForm" class="col-md-6" v-slot="{ errors }" @submit="sendCollections">
+    <div class="my-2 row justify-content-center" v-if="collections.carts.length">
+      <Form
+        ref="collectionForm"
+        class="col-md-6 mb-3"
+        v-slot="{ errors }"
+        @submit="sendCollections"
+      >
         <h2>請填寫收藏者資訊</h2>
         <div class="mb-3">
           <label for="name" class="form-label">姓名</label>
@@ -123,6 +77,21 @@
             rules="required"
           ></Field>
           <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="contact_date" class="form-label">提供可聯繫時間</label>
+          <Field
+            id="contact_date"
+            name="contact_date"
+            type="date"
+            class="form-control"
+            v-model="contact_date"
+            :class="{ 'is-invalid': errors['可聯繫時間'] }"
+            placeholder="請輸入可聯繫時間"
+            rules="required"
+          ></Field>
+          <ErrorMessage name="contact_date" class="invalid-feedback"></ErrorMessage>
         </div>
 
         <div class="mb-3">
@@ -199,6 +168,7 @@ export default {
       isLoading: false,
       paintings: [],
       painting: {},
+      contact_date: '',
       collections: {
         carts: [],
       },
@@ -208,6 +178,7 @@ export default {
       form: {
         user: {
           name: '',
+          contact_date: '',
           email: '',
           tel: '',
           address: '',
@@ -216,23 +187,12 @@ export default {
       },
     };
   },
+  watch: {
+    contact_date() {
+      this.form.user.contact_date = Math.floor(new Date(this.contact_date) / 1000);
+    },
+  },
   methods: {
-    getPaintings() {
-      this.isLoading = true;
-      this.$http
-        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`)
-        .then((res) => {
-          this.paintings = res.data.products;
-          this.isLoading = false;
-        })
-        .catch((err) => {
-          this.isLoading = false;
-          this.$httpMessageState(err.response, '錯誤訊息');
-        });
-    },
-    getPainting(id) {
-      this.$router.push(`/painting/${id}`);
-    },
     getCollections() {
       this.isLoading = true;
       this.$http
@@ -244,31 +204,6 @@ export default {
         .catch((err) => {
           this.isLoading = false;
           this.$httpMessageState(err.response, '錯誤訊息');
-        });
-    },
-    addToCollection(id, qty = 1) {
-      this.isLoading = true;
-      this.state.paintingLoading = id;
-      const collection = {
-        product_id: id,
-        qty,
-      };
-      this.$http
-        .post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`, {
-          data: collection,
-        })
-        .then((res) => {
-          if (res.data.success) {
-            this.getCollections();
-            this.isLoading = false;
-            this.state.paintingLoading = '';
-            this.$httpMessageState(res, '收藏');
-          }
-        })
-        .catch((err) => {
-          this.isLoading = false;
-          this.state.paintingLoading = '';
-          this.$httpMessageState(err, '收藏');
         });
     },
     removeCollection(id) {
@@ -321,7 +256,6 @@ export default {
     },
   },
   mounted() {
-    this.getPaintings();
     this.getCollections();
   },
 };
