@@ -42,7 +42,7 @@
       </li>
     </ul>
 
-    <div class="container mt-4">
+    <div class="container p-0 mt-4">
       <ul class="paintings-card list-unstyled row row-cols-md-2 row-cols-lg-4">
         <li v-for="painting in paintings" :key="painting.id" class="col position-relative mt-3">
           <span class="tag">{{ painting.category }}</span>
@@ -81,7 +81,7 @@
         </li>
       </ul>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-4">
       <PaginationVue :pages="pagination" @emit-page="getPaintings"></PaginationVue>
     </div>
   </div>

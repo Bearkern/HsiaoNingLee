@@ -1,5 +1,5 @@
 <template>
-  <h1>收藏管理</h1>
+  <h1>預約收藏管理</h1>
   <Loading :active="isLoading" :z-index="1060"></Loading>
   <table class="table mt-4">
     <thead>
