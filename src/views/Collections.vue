@@ -1,5 +1,5 @@
 <template>
-  <div class="container min-vh-100 pt-7">
+  <div class="container pt-7">
     <Loading :active="isLoading" :z-index="1060"></Loading>
     <div v-if="collections.carts.length">
       <div class="text-end">

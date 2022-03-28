@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-6 row justify-content-center">
+  <div class="container-fluid py-6 row justify-content-center">
     <Loading :active="isLoading" :z-index="1060"></Loading>
     <h1>預約收藏</h1>
     <form class="col-md-8" @submit.prevent="makeAppointment">
@@ -17,7 +17,12 @@
             <td>
               <div
                 :style="{ backgroundImage: `url(${painting.product.imageUrl})` }"
-                style="height: 120px; background-position: center center; background-size: cover"
+                style="
+                  height: 140px;
+                  width: 200px;
+                  background-position: center center;
+                  background-size: cover;
+                "
               ></div>
             </td>
             <td>{{ painting.product.title }}</td>

@@ -1,8 +1,7 @@
 <template>
-  <div class="container p-0">
-    <Loading :active="isLoading" :z-index="1060"></Loading>
+  <div class="container pt-7">
+    <Loading :active="isLoading" :z-index="1000"></Loading>
     <swiper
-      class="pt-5"
       :slides-per-view="1"
       :space-between="0"
       :modules="modules"
@@ -25,7 +24,7 @@
           href="#"
           data-toggle="tab"
           class="nav-link"
-          :class="{ active: category === ''}"
+          :class="{ active: category === '' }"
           @click.prevent="getPaintings"
           >所有創作</a
         >
@@ -42,22 +41,18 @@
       </li>
     </ul>
 
-    <div class="container p-0 mt-4">
-      <ul class="paintings-card list-unstyled row row-cols-md-2 row-cols-lg-4">
+    <div class="container mt-4">
+      <ul class="paintings-card list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <li v-for="painting in paintings" :key="painting.id" class="col position-relative mt-3">
           <span class="tag">{{ painting.category }}</span>
-          <div
-            class="card-image"
-            style="height: 200px; background-position: center center; background-size: cover"
-            :style="{ backgroundImage: `url(${painting.imageUrl})` }"
-          ></div>
-          <div class="d-flex align-items-center justify-content-around paintings-card-info">
+          <div class="card-image" :style="{ backgroundImage: `url(${painting.imageUrl})` }"></div>
+          <div class="paintings-card-info d-flex align-items-center justify-content-around">
             <i class="favorite bi bi-suit-heart fs-4"></i>
             <h3>{{ painting.title }}</h3>
             <span>{{ painting.size }}</span>
           </div>
           <button
-            class="painting-btn btn btn-primary"
+            class="card-btn btn btn-outline-info"
             :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
             @click="getPainting(painting.id)"
           >
@@ -68,7 +63,7 @@
             欣賞畫作
           </button>
           <button
-            class="painting-btn btn btn-secondary"
+            class="card-btn btn btn-outline-primary"
             :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
             @click="addToCollection(painting.id)"
           >
@@ -81,6 +76,7 @@
         </li>
       </ul>
     </div>
+
     <div class="d-flex justify-content-center mt-4">
       <PaginationVue :pages="pagination" @emit-page="getPaintings"></PaginationVue>
     </div>
@@ -179,19 +175,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.paintings-card .tag {
-  position: absolute;
-  left: 20px;
-  top: 0;
-  padding: 10px;
-  background-color: $martinique;
-  color: $white;
-  writing-mode: vertical-lr;
-  letter-spacing: 5px;
+.paintings-card {
+  .tag {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    padding: 10px;
+    background-color: $martinique;
+    color: $white;
+    writing-mode: vertical-lr;
+    letter-spacing: 5px;
+  }
+  .card-image {
+    height: 300px;
+    background-position: center center;
+    background-size: cover;
+  }
 }
 .paintings-card-info {
   color: $martinique;
   font-size: 20px;
+  padding: 8px 0;
   border: 1px solid $french-lilac;
   border-top: none;
   .favorite {
@@ -211,12 +215,11 @@ export default {
   span {
     border-left: 1px solid $french-lilac;
     font-size: 16px;
-    padding: 8px 0px 8px 5px;
+    padding: 8px 0px 8px 8px;
   }
 }
-.painting-btn {
+.card-btn {
   width: 50%;
   margin-top: -1px;
-  text-align: center;
 }
 </style>

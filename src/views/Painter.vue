@@ -12,7 +12,7 @@
   background-image: url('../assets/images/hydrangea.jpg');
   background-size: cover;
   background-position: center;
-  height: 600px;
+  height: calc(100vh);
 }
 img.painter {
   width: 300px;

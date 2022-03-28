@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark position-fixed zindex-fixed bg-primary">
     <div class="container-fluid">
       <ToastMessage></ToastMessage>
       <router-link class="navbar-brand" to="/admin">畫作管理</router-link>
@@ -14,7 +14,11 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav"
+        ref="collapse"
+      >
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link class="nav-link" to="/admin/collections">預約收藏管理</router-link>
@@ -37,14 +41,17 @@
 
 <script>
 import ToastMessage from '@/components/ToastMessage.vue';
+import collapseMixin from '@/mixins/collapseMixin';
 
 export default {
+  mixins: [collapseMixin],
   components: {
     ToastMessage,
   },
   methods: {
     logout() {
-      this.$http.post(`${process.env.VUE_APP_API}/logout`)
+      this.$http
+        .post(`${process.env.VUE_APP_API}/logout`)
         .then(() => {
           this.$router.push('/login');
         })

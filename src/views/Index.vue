@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-  <Navbar></Navbar>
+  <div class="container-fluid p-0 min-vh-100">
+    <Navbar></Navbar>
     <ToastMessage></ToastMessage>
     <router-view />
-  <Footer></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
