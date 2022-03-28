@@ -14,6 +14,7 @@
   background-position: center;
   height: calc(100vh);
 }
+
 img.painter {
   width: 300px;
   height: 300px;

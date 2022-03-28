@@ -52,7 +52,7 @@
             <span>{{ painting.size }}</span>
           </div>
           <button
-            class="card-btn btn btn-outline-info"
+            class="card-btn btn btn-secondary"
             :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
             @click="getPainting(painting.id)"
           >
@@ -63,7 +63,7 @@
             欣賞畫作
           </button>
           <button
-            class="card-btn btn btn-outline-primary"
+            class="card-btn btn btn-primary"
             :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
             @click="addToCollection(painting.id)"
           >
