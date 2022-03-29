@@ -1,7 +1,7 @@
 <template>
   <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed bg-dark w-100">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/">李曉寧水彩畫家</router-link>
+      <router-link class="navbar-brand" to="/" @click="closeNavHam">李曉寧水彩畫家</router-link>
       <button
         class="navbar-toggler"
         type="button"
