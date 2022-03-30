@@ -6,13 +6,15 @@
       </div>
 
       <div class="col">
-        <span class="text-white">個人作品網站，非商業用途 ｜ 圖文授權：李曉寧老師</span>
-        <a
-          href="https://www.facebook.com/leehsiaolin"
-          class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1"
-          target="_blank"
-          ><i class="bi bi-facebook fs-3 ps-2"></i
-        ></a>
+        <span class="text-white">個人作品網站，非商業用途 ｜ </span>
+        <span class="text-white"
+          >圖文授權：李曉寧老師<a
+            href="https://www.facebook.com/leehsiaolin"
+            class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1"
+            target="_blank"
+            ><i class="bi bi-facebook fs-3 ps-2"></i
+          ></a>
+        </span>
       </div>
       <ul class="nav">
         <li class="ms-3">
@@ -29,3 +31,14 @@
     </footer>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.col span {
+  display: block;
+}
+@media (min-width: 576px) {
+  .col span {
+    display: inline;
+  }
+}
+</style>

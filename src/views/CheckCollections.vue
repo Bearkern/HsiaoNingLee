@@ -70,12 +70,12 @@
         </tbody>
       </table>
       <p class="text-danger">
-        ＊ 預約後若無人回應，請主動聯繫畫家<a
+        ＊ 有意收藏畫作者，請直接私訊藝術家<a
           href="https://www.facebook.com/leehsiaolin"
           class="mb-3 me-2 mb-md-0 text-secondary text-decoration-none lh-1"
           target="_blank"
           ><i class="bi bi-facebook fs-3 mx-2"></i
-        ></a>
+        ></a>或致電 0935-509498
       </p>
       <div class="text-end" v-if="appointment.is_paid === false">
         <button class="btn btn-danger" type="submit">確認預約畫作</button>

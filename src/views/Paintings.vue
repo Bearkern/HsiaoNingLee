@@ -42,7 +42,7 @@
     </ul>
 
     <div class="container mt-4">
-      <ul class="paintings-card list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      <ul class="paintings-card list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4">
         <li v-for="painting in paintings" :key="painting.id" class="col position-relative mt-3">
           <span class="tag">{{ painting.category }}</span>
           <div class="card-image" :style="{ backgroundImage: `url(${painting.imageUrl})` }"></div>
