@@ -115,10 +115,6 @@
     line-height: 1.6;
     margin-bottom: 0;
   }
-  a:hover {
-    color: $white;
-    background-color: $martinique-light1;
-  }
 }
 .go-painting {
   align-self: flex-end;
@@ -131,6 +127,10 @@
   padding: 12px 6px;
   border: 2px solid #fff;
   border-radius: 8px;
+  &:hover {
+    color: $white;
+    background-color: $martinique-light1;
+  }
 }
 .painter-icon {
   position: absolute;

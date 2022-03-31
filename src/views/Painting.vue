@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-6">
     <Loading :active="isLoading" :z-index="1060"></Loading>
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" class="fs-5">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <router-link to="/paintings">水彩創作</router-link>
@@ -10,16 +10,22 @@
       </ol>
     </nav>
     <div class="row justify-content-center">
-      <article class="col-8">
+      <div class="painting-group col-12 col-lg-8 d-flex justify-content-center">
+        <div class="painting-frame">
+          <div class="painting-image" :style="{backgroundImage: `url(${painting.imageUrl})`}"></div>
+        </div>
+      </div>
+      <div class="painting-detail col-12 col-lg-4 my-3 d-flex flex-column">
         <h2>{{ painting.title }}</h2>
-        <div>{{ painting.content }}</div>
-        <div>{{ painting.description }}</div>
-        <img :src="painting.imageUrl" class="img-fluid mb-3" />
-      </article>
-      <div class="col-4">
-        <div class="h5">畫作年份：{{ painting.year }}</div>
-        <hr />
-        <button type="button" class="btn btn-outline-danger" @click="addToCollection(painting.id)">
+        <h3>
+          創作年份：<span>{{ painting.year }}</span>
+        </h3>
+        <h3>
+          畫作大小：<span>{{ painting.size }}</span>
+        </h3>
+        <h3>創作理念：</h3>
+        <p>{{ painting.description }}</p>
+        <button type="button" class="btn btn-outline-primary" @click="addToCollection(painting.id)">
           加入收藏
         </button>
       </div>
@@ -78,3 +84,46 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.breadcrumb-item a {
+  text-decoration: none;
+}
+.painting-frame { @include painting-frame(200px, 80%, 8vh, 6vw); }
+
+.painting-detail {
+  h2 {
+    color: $kimberly-dark;
+    font-size: 1.75rem;
+    border-bottom: 1px solid $martinique;
+    padding-bottom: 5px;
+    margin-bottom: 16px;
+  }
+  h3 {
+    color: $french-lilac-dark1;
+    font-size: 1.25rem;
+    span {
+      color: $kimberly-dark;
+    }
+  }
+  p {
+    color: $martinique-light2;
+    font-size: 1.25rem;
+  }
+  button {
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .painting-frame {
+    @include painting-frame(400px, 100%, 5vw, 5vh);
+  }
+}
+@include media-breakpoint-up(lg) {
+.painting-frame { @include painting-frame(500px, 100%, 3vw, 5vh); }
+
+}
+</style>

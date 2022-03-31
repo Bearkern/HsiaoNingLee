@@ -1,5 +1,5 @@
 <template>
-  <div class="container pt-7">
+  <div class="container pt-5 pt-md-6 pt-lg-7">
     <Loading :active="isLoading" :z-index="1000"></Loading>
     <swiper
       :slides-per-view="1"
@@ -10,10 +10,8 @@
     >
       <swiper-slide v-for="painting in paintings" :key="painting.id">
         <div
-          style="height: 600px; background-position: center center; background-size: cover"
-          :style="{
-            backgroundImage: `url(${painting.imageUrl})`,
-          }"
+          class="swiper-painting"
+          :style="{ backgroundImage: `url(${painting.imageUrl})` }"
         ></div>
       </swiper-slide>
     </swiper>
@@ -42,11 +40,14 @@
     </ul>
 
     <div class="container mt-4">
-      <ul class="paintings-card list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4">
+      <ul class="painting-card list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4">
         <li v-for="painting in paintings" :key="painting.id" class="col position-relative mt-3">
           <span class="tag">{{ painting.category }}</span>
-          <div class="card-image" :style="{ backgroundImage: `url(${painting.imageUrl})` }"></div>
-          <div class="paintings-card-info d-flex align-items-center justify-content-around">
+          <div
+            class="card-image border border-bottom-0 border-primary rounded-top"
+            :style="{ backgroundImage: `url(${painting.imageUrl})` }"
+          ></div>
+          <div class="painting-card-info d-flex align-items-center justify-content-around">
             <i class="favorite bi bi-suit-heart fs-4"></i>
             <h3>{{ painting.title }}</h3>
             <span>{{ painting.size }}</span>
@@ -175,27 +176,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.paintings-card {
-  .tag {
-    position: absolute;
-    left: 20px;
-    top: 0;
-    padding: 10px;
-    background-color: $martinique;
-    color: $white;
-    writing-mode: vertical-lr;
-    letter-spacing: 5px;
-  }
-  .card-image {
-    height: 300px;
-    background-position: center center;
-    background-size: cover;
-  }
+.swiper {
+  display: none;
 }
-.paintings-card-info {
-  color: $martinique;
-  font-size: 20px;
-  padding: 8px 0;
+.nav-tabs {
+  border-bottom: 0;
+}
+.nav-item {
+  border-bottom: 1px solid $french-lilac-dark1;
+}
+.painting-card {
+  margin-left: calc(-1 * var(--bs-gutter-x));
+  margin-right: calc(-1 * var(--bs-gutter-x));
+}
+.tag {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  padding: 10px;
+  background-color: $martinique;
+  color: $white;
+  writing-mode: vertical-lr;
+  letter-spacing: 5px;
+}
+.card-image {
+  height: 250px;
+  background-position: center center;
+  background-size: cover;
+}
+.painting-card-info {
+  color: $martinique-light1;
+  padding: 3px 0;
   border: 1px solid $french-lilac;
   border-top: none;
   .favorite {
@@ -209,17 +220,42 @@ export default {
   }
   h3 {
     width: 55%;
-    font-size: 20px;
+    font-size: 1.25rem;
     margin-bottom: 0;
   }
   span {
     border-left: 1px solid $french-lilac;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 8px 0px 8px 8px;
   }
 }
 .card-btn {
+  color: $white;
   width: 50%;
   margin-top: -1px;
+  &:hover {
+    color: $white;
+  }
+}
+@include media-breakpoint-up(md) {
+  .swiper {
+    display: block;
+  }
+  .swiper-painting {
+    height: calc(35vh);
+    background-position: center center;
+    background-size: cover;
+  }
+  .nav-tabs {
+    border-bottom: 1px solid $french-lilac-dark1; }
+
+  .nav-item {
+    border-bottom: 0;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .swiper-painting {
+    height: calc(60vh);
+  }
 }
 </style>
