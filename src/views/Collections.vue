@@ -41,7 +41,6 @@
             <th>畫作</th>
             <th class="table-responsive">年份</th>
             <th class="table-responsive">尺寸</th>
-            <th class="table-responsive">單位</th>
           </tr>
         </thead>
         <tbody>
@@ -66,9 +65,9 @@
                 :style="{ backgroundImage: `url(${collection.product.imageUrl})` }"
               ></div>
             </td>
+
             <td class="table-responsive">{{ collection.product.year }}</td>
             <td class="table-responsive">{{ collection.product.size }}</td>
-            <td class="table-responsive">{{ collection.product.unit }}</td>
           </tr>
         </tbody>
       </table>

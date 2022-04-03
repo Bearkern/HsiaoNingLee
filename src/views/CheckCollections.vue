@@ -15,7 +15,6 @@
             <th>畫作</th>
             <th class="table-responsive">年份</th>
             <th class="table-responsive">尺寸</th>
-            <th class="table-responsive">單位</th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +32,6 @@
             </td>
             <td class="table-responsive">{{ painting.product.year }}</td>
             <td class="table-responsive">{{ painting.product.size }}</td>
-            <td class="table-responsive">{{ painting.qty }} / {{ painting.product.unit }}</td>
           </tr>
         </tbody>
       </table>

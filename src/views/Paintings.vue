@@ -47,7 +47,6 @@
           :style="{ backgroundImage: `url(${painting.imageUrl})` }"
         ></div>
         <div class="painting-card-info d-flex align-items-center justify-content-around">
-          <i class="favorite bi bi-suit-heart fs-4 text-white"></i>
           <h3>{{ painting.title }}</h3>
           <span>{{ painting.size }}</span>
         </div>
@@ -201,14 +200,6 @@ export default {
   padding: 3px 0;
   border: 1px solid $french-lilac;
   border-top: none;
-  .favorite {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    &:hover {
-      cursor: pointer;
-    }
-  }
   h3 {
     width: 55%;
     font-size: 1.25rem;
