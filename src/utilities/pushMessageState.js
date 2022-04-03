@@ -1,10 +1,10 @@
 import emitter from '@/utilities/mitt';
 
-export default function (response, title = '更新') {
+export default function (response, title = '更新', painting = '') {
   if (response.data.success) {
     emitter.emit('push-message', {
-      style: 'success',
-      title: `${title}成功`,
+      style: 'primary',
+      title: `${painting}${title}成功`,
     });
   } else {
     const message = typeof response.data?.message === 'string' ? [response.data.message] : response.data.message;

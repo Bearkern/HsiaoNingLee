@@ -23,15 +23,12 @@
           </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item m-d-none">
-            <router-link class="nav-link" to="/admin" @click="closeNavHam"
-              ><i class="bi bi-person-circle fs-3 pe-3"></i>登入</router-link
-            >
-          </li>
           <li class="nav-item collection">
             <router-link class="nav-link" to="/collections" @click="closeNavHam">
               <i class="bi bi-collection-fill fs-3 pe-3 position-relative"
-                ><em class="translate-middle badge rounded-pill bg-danger fs-6">3</em>
+                ><em class="translate-middle badge rounded-pill bg-danger fs-6">{{
+                  collectionData.carts.length
+                }}</em>
               </i>
               <span>收藏</span>
             </router-link>
@@ -44,9 +41,33 @@
 
 <script>
 import collapseMixin from '@/mixins/collapseMixin';
+import emitter from '@/utilities/mitt';
 
 export default {
+  data() {
+    return {
+      collectionData: {
+        carts: [],
+      },
+    };
+  },
   mixins: [collapseMixin],
+  methods: {
+    getCollection() {
+      this.$http
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`)
+        .then((res) => {
+          this.collectionData = res.data.data;
+        })
+        .catch(() => {});
+    },
+  },
+  mounted() {
+    this.getCollection();
+    emitter.on('get-collection', () => {
+      this.getCollection();
+    });
+  },
 };
 </script>
 
@@ -56,21 +77,19 @@ export default {
 }
 .collection {
   em {
-    // display: none;
     position: absolute;
     top: 0;
     right: -20px;
   }
+  span {
+    display: none;
+  }
 }
-@media (max-width: 768px) {
+@include media-breakpoint-up(md) {
   .collection {
-    em {
-      display: block;
-    }
     span {
-      display: none;
+      display: inline-block;
     }
   }
-  .m-d-none { display: none; }
 }
 </style>

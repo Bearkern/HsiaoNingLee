@@ -1,174 +1,178 @@
 <template>
-  <div class="container pt-7">
-    <Loading :active="isLoading" :z-index="1060"></Loading>
-    <div v-if="collections.carts.length">
-      <div class="text-end">
-        <button class="btn btn-outline-danger" type="button" @click="removeCollections">
-          清空收藏
-        </button>
-      </div>
-      <table class="table align-middle">
+  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <div class="container pt-6 pt-lg-7 mb-4">
+    <h3>收藏畫作須知</h3>
+    <ul>
+      <li><p>填寫收藏者資料僅做為建檔，通知藝術家畫展資訊使用。</p></li>
+      <li>
+        有意收藏畫作者，請直接私訊李曉寧藝術家
+        <a
+          href="https://www.facebook.com/leehsiaolin"
+          class="mb-3 me-2 mb-md-0 text-primary text-decoration-none lh-1"
+          target="_blank"
+          ><i class="bi bi-facebook fs-3"></i
+        ></a>
+        或致電 0935-509498
+      </li>
+    </ul>
+  </div>
+
+  <div v-if="!collections.carts.length" class="container empty-collection mb-4">
+    <p class="d-inline-block">您目前沒有收藏任何畫作</p>
+    <router-link class="btn btn-primary text-white" to="/paintings">前往收藏</router-link>
+    <div class="bougainvillea mt-4"></div>
+  </div>
+
+  <div v-else class="collect-group container row mx-auto">
+    <div class="collected-paintings col-lg-8 mb-4">
+      <h3>已收藏畫作</h3>
+      <table class="table align-middle table-primary">
         <thead>
           <tr>
-            <th></th>
-            <th>品名</th>
-            <th style="width: 110px">數量</th>
-            <th>畫作大小</th>
+            <th>
+              <botton class="btn btn-outline-danger" @click="removeCollections"
+                ><i class="bi bi-folder-x"></i
+              ></botton>
+            </th>
+            <th>
+              畫作<span class="d-sm-none">資訊</span
+              ><span class="d-none d-sm-inline-block">名稱</span>
+            </th>
+            <th>畫作</th>
+            <th class="table-responsive">年份</th>
+            <th class="table-responsive">尺寸</th>
+            <th class="table-responsive">單位</th>
           </tr>
         </thead>
         <tbody>
-          <template v-for="collection in collections.carts" :key="collection.id">
-            <tr>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-outline-danger btn-sm"
-                  :disabled="state.paintingLoading === painting.id"
-                  @click="removeCollection(collection.id)"
-                >
-                  <i class="bi bi-x"></i>
-                </button>
-              </td>
-              <td>
-                {{ collection.product.title }}
-              </td>
-              <td>
-                <div class="input-group input-group-sm">
-                  <input
-                    type="number"
-                    class="form-control"
-                    min="1"
-                    v-model.number="collection.qty"
-                  />
-                  <div class="input-group-text">/ {{ collection.product.unit }}</div>
-                </div>
-              </td>
-              <td>
-                {{ collection.product.size }}
-              </td>
-            </tr>
-          </template>
+          <tr v-for="collection in collections.carts" :key="collection.id">
+            <td>
+              <botton
+                class="btn btn-outline-danger"
+                :disabled="state.paintingLoading === painting.id"
+                @click="removeCollection(collection.id, collection.product.title)"
+              >
+                <i class="bi bi-folder-minus"></i>
+              </botton>
+            </td>
+            <td>
+              <span class="badge bg-primary">{{ collection.product.category }}</span>
+              <h4 class="mt-2">{{ collection.product.title }}</h4>
+              <span class="mobile-only">{{ collection.product.size }}</span>
+            </td>
+            <td>
+              <div
+                class="painting-image"
+                :style="{ backgroundImage: `url(${collection.product.imageUrl})` }"
+              ></div>
+            </td>
+            <td class="table-responsive">{{ collection.product.year }}</td>
+            <td class="table-responsive">{{ collection.product.size }}</td>
+            <td class="table-responsive">{{ collection.product.unit }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div v-else class="pb-5">
-      您目前沒有收藏任何畫作
-      <router-link class="btn btn-secondary" to="/paintings">前往收藏</router-link>
-    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="collector-info">
+        <h3>收藏者資訊</h3>
+        <Form ref="collectionForm" class="row mb-4" v-slot="{ errors }" @submit="sendCollections">
+          <div class="col-12 col-md-4 col-lg-12 mb-2">
+            <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
+            <Field
+              id="name"
+              name="姓名"
+              type="text"
+              class="form-control"
+              v-model="form.user.name"
+              :class="{ 'is-invalid': errors['姓名'] }"
+              placeholder="請輸入姓名"
+              rules="required"
+            ></Field>
+            <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+          </div>
 
-    <div class="my-2 row justify-content-center" v-if="collections.carts.length">
-      <Form
-        ref="collectionForm"
-        class="col-md-6 mb-3"
-        v-slot="{ errors }"
-        @submit="sendCollections"
-      >
-        <h2>請填寫收藏者資訊</h2>
-        <div class="mb-3">
-          <label for="name" class="form-label">姓名</label>
-          <Field
-            id="name"
-            name="姓名"
-            type="text"
-            class="form-control"
-            v-model="form.user.name"
-            :class="{ 'is-invalid': errors['姓名'] }"
-            placeholder="請輸入姓名"
-            rules="required"
-          ></Field>
-          <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
-        </div>
+          <div class="col-12 col-md-8 col-lg-12 mb-2">
+            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+            <Field
+              id="email"
+              name="email"
+              type="email"
+              class="form-control"
+              v-model="form.user.email"
+              :class="{ 'is-invalid': errors['email'] }"
+              placeholder="請輸入 Email"
+              rules="email|required"
+            ></Field>
+            <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
+          </div>
 
-        <div class="mb-3">
-          <label for="contact_date" class="form-label">提供可聯繫時間</label>
-          <Field
-            id="contact_date"
-            name="contact_date"
-            type="date"
-            class="form-control"
-            v-model="contact_date"
-            :class="{ 'is-invalid': errors['可聯繫時間'] }"
-            placeholder="請輸入可聯繫時間"
-            rules="required"
-          ></Field>
-          <ErrorMessage name="contact_date" class="invalid-feedback"></ErrorMessage>
-        </div>
+          <div class="col-12 col-md-4 col-lg-12 mb-2">
+            <label for="tel" class="form-label">電話<span class="text-danger">*</span></label>
+            <Field
+              id="tel"
+              name="電話"
+              type="tel"
+              class="form-control"
+              v-model="form.user.tel"
+              :class="{ 'is-invalid': errors['電話'] }"
+              placeholder="請輸入電話"
+              rules="required|min:8|max:10"
+            ></Field>
+            <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+          </div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <Field
-            id="email"
-            name="email"
-            type="email"
-            class="form-control"
-            v-model="form.user.email"
-            :class="{ 'is-invalid': errors['email'] }"
-            placeholder="請輸入 Email"
-            rules="email|required"
-          ></Field>
-          <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
-        </div>
+          <div class="col-12 col-md-8 col-lg-12 mb-2">
+            <label for="address" class="form-label">地址<span class="text-danger">*</span></label>
+            <Field
+              id="address"
+              name="地址"
+              type="text"
+              class="form-control"
+              v-model="form.user.address"
+              :class="{ 'is-invalid': errors['地址'] }"
+              placeholder="請輸入地址"
+              rules="required"
+            ></Field>
+            <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+          </div>
 
-        <div class="mb-3">
-          <label for="tel" class="form-label">電話</label>
-          <Field
-            id="tel"
-            name="電話"
-            type="tel"
-            class="form-control"
-            v-model="form.user.tel"
-            :class="{ 'is-invalid': errors['電話'] }"
-            placeholder="請輸入電話"
-            rules="required|min:8|max:10"
-          ></Field>
-          <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
-        </div>
-
-        <div class="mb-3">
-          <label for="address" class="form-label">地址</label>
-          <Field
-            id="address"
-            name="地址"
-            type="text"
-            class="form-control"
-            v-model="form.user.address"
-            :class="{ 'is-invalid': errors['地址'] }"
-            placeholder="請輸入地址"
-            rules="required"
-          ></Field>
-          <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
-        </div>
-
-        <div class="mb-3">
-          <label for="message" class="form-label">給畫家的話</label>
-          <Field
-            name="message"
-            id="message"
-            class="form-control"
-            v-model="form.message"
-            cols="30"
-            rows="10"
-            as="textarea"
-          ></Field>
-        </div>
-        <div class="text-end">
-          <button class="btn btn-danger" type="submit" :disabled="!collections.carts.length">
-            友誼收藏
-          </button>
-        </div>
-      </Form>
+          <div class="mb-2">
+            <label for="message" class="form-label">備註</label>
+            <Field
+              name="message"
+              id="message"
+              class="form-control"
+              v-model="form.message"
+              cols="30"
+              rows="3"
+              as="textarea"
+            ></Field>
+          </div>
+          <div class="text-end">
+            <button
+              class="btn btn-primary text-white"
+              type="submit"
+              :disabled="!collections.carts.length"
+            >
+              填寫完成
+            </button>
+          </div>
+        </Form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import emitter from '@/utilities/mitt';
+
 export default {
   data() {
     return {
       isLoading: false,
       paintings: [],
       painting: {},
-      contact_date: '',
       collections: {
         carts: [],
       },
@@ -178,7 +182,6 @@ export default {
       form: {
         user: {
           name: '',
-          contact_date: '',
           email: '',
           tel: '',
           address: '',
@@ -186,11 +189,6 @@ export default {
         message: '',
       },
     };
-  },
-  watch: {
-    contact_date() {
-      this.form.user.contact_date = Math.floor(new Date(this.contact_date) / 1000);
-    },
   },
   methods: {
     getCollections() {
@@ -206,21 +204,19 @@ export default {
           this.$httpMessageState(err.response, '錯誤訊息');
         });
     },
-    removeCollection(id) {
-      this.isLoading = true;
+    removeCollection(id, title) {
       this.state.paintingLoading = id;
       this.$http
         .delete(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`)
         .then((res) => {
           this.state.paintingLoading = '';
           this.getCollections();
-          this.isLoading = false;
-          this.$httpMessageState(res, '移除收藏品項');
+          emitter.emit('get-collection');
+          this.$httpMessageState(res, '移除', title);
         })
         .catch((err) => {
           this.state.paintingLoading = '';
-          this.isLoading = false;
-          this.$httpMessageState(err.response, '移除收藏品項');
+          this.$httpMessageState(err.response, '移除', title);
         });
     },
     removeCollections() {
@@ -230,6 +226,7 @@ export default {
         .then((res) => {
           this.getCollections();
           this.isLoading = false;
+          emitter.emit('get-collection');
           this.$httpMessageState(res, '清空收藏');
         })
         .catch((err) => {
@@ -245,13 +242,14 @@ export default {
         })
         .then((res) => {
           this.$refs.collectionForm.resetForm();
+          emitter.emit('get-collection');
           this.$router.push(`/checkCollections/${res.data.orderId}`);
           this.isLoading = false;
-          this.$httpMessageState(res, '友誼收藏');
+          this.$httpMessageState(res, '送出資料');
         })
         .catch((err) => {
           this.isLoading = false;
-          this.$httpMessageState(err.response, '友誼收藏');
+          this.$httpMessageState(err.response, '送出資料');
         });
     },
   },
@@ -260,3 +258,103 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+h3 {
+  color: $french-lilac-dark2;
+  font-size: 1.5rem;
+  border-bottom: 1px solid $french-lilac-dark1;
+  padding-bottom: 0.5rem;
+}
+h4 {
+  color: $french-lilac-dark2;
+  font-size: 1rem;
+}
+ul {
+  border-left: 1px solid $kimberly-light;
+  margin-left: 1.75rem;
+}
+p,
+li {
+  color: $martinique-light2;
+  font-size: 1.25rem;
+  list-style-image: url('../assets/images/favicon-16x16.png');
+}
+.empty-collection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  p {
+    color: $french-lilac-dark1;
+  }
+  .btn-primary {
+    min-width: 100%;
+  }
+}
+.bougainvillea {
+  width: 100%;
+  height: 35vh;
+  background-image: url('../assets/images/bougainvillea.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.collect-group {
+  padding: 0;
+}
+.collected-paintings {
+  .btn {
+    border: none;
+  }
+  .table > :not(:first-child) {
+    border-top: 2px solid $kimberly-light;
+  }
+  th {
+    color: $kimberly-dark;
+    line-height: 2.25rem;
+  }
+  td {
+    color: $kimberly;
+  }
+  .table-responsive {
+    display: none;
+  }
+}
+.painting-image {
+  background-size: cover;
+  background-position: center center;
+  width: 150px;
+  height: 100px;
+}
+.collector-info {
+  .form-label {
+    color: $primary;
+  }
+}
+@include media-breakpoint-up(sm) {
+  .collected-paintings {
+    .mobile-only {
+      display: none;
+    }
+    .table-responsive {
+      display: table-cell;
+    }
+  }
+  .empty-collection {
+    justify-content: center;
+    p {
+      font-size: 1.5rem;
+      margin: 0 20px 0 0;
+    }
+    .btn-primary {
+      min-width: 10%;
+    }
+  }
+}
+@include media-breakpoint-up(lg) {
+  .bougainvillea {
+    height: 50vh;
+  }
+}
+</style>

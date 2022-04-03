@@ -1,7 +1,7 @@
 <template>
-  <h1>預約收藏管理</h1>
   <Loading :active="isLoading" :z-index="1060"></Loading>
-  <table class="table mt-4">
+  <h1>收藏者資料管理</h1>
+  <table class="table">
     <thead>
       <tr>
         <th>序號</th>

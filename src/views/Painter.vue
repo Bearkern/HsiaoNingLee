@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid banner px-4 d-flex align-items-center">
     <div class="description">
-      <p>
+      <p class="text-white">
         畫筆下的「花」脫俗，篩去嬌媚，自展輕柔<br />
         畫筆下的「景」善美，引光入境，自說故事<br />
         畫筆下的「物」律動，流轉心情，自顯生命
       </p>
-      <router-link to="/paintings" class="go-painting">前往創作</router-link>
+      <router-link to="/paintings" class="go-painting text-white">前往創作</router-link>
     </div>
     <img class="painter-icon" src="../assets/images/LeeHsiaoNing.jpeg" alt="Lee Hsiao Ning" />
   </div>
@@ -99,7 +99,7 @@
   background-image: url('../assets/images/hydrangea.jpg');
   background-size: cover;
   background-position: center center;
-  height: calc(100vh);
+  height: 100vh;
 }
 .description {
   display: flex;
@@ -107,7 +107,6 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.35);
   padding: 40px;
-  color: $white;
   writing-mode: vertical-lr;
   letter-spacing: 3px;
   p {
@@ -123,12 +122,10 @@
   writing-mode: vertical-lr;
   letter-spacing: 5px;
   background-color: $martinique-light2;
-  color: $white;
   padding: 12px 6px;
   border: 2px solid #fff;
   border-radius: 8px;
   &:hover {
-    color: $white;
     background-color: $martinique-light1;
   }
 }

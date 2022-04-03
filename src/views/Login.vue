@@ -1,10 +1,11 @@
 <template>
-  <div class="container py-7">
+  <div class="container pt-6 pt-lg-7">
     <Loading :active="isLoading" :z-index="1060"></Loading>
     <div class="row justify-content-center">
-      <Form class="col-md-6" v-slot="{ errors }" @submit="login">
+      <div class="col-lg-6 hydrangea mb-4"></div>
+      <Form class="col-lg-6" v-slot="{ errors }" @submit="login">
         <div class="mb-2">
-          <label for="email" class="form-label">帳號</label>
+          <label for="email" class="form-label text-primary">帳號</label>
           <Field
             id="email"
             name="email"
@@ -19,7 +20,7 @@
         </div>
 
         <div class="mb-2">
-          <label for="password" class="form-label">密碼</label>
+          <label for="password" class="form-label text-primary">密碼</label>
           <Field
             id="password"
             name="password"
@@ -34,7 +35,7 @@
         </div>
 
         <div class="text-end">
-          <button type="submit" class="btn btn-primary">登入</button>
+          <button type="submit" class="btn btn-primary text-white">登入</button>
         </div>
       </Form>
     </div>
@@ -66,10 +67,18 @@ export default {
         })
         .catch((err) => {
           this.isLoading = false;
-          console.log(err.response.data);
           this.$httpMessageState(err.response, '登入');
         });
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.hydrangea {
+  height: 400px;
+  background-image: url('../assets/images/hydrangea.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+</style>

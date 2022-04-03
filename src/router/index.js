@@ -26,6 +26,10 @@ const routes = [
         component: () => import('../views/CheckCollections.vue'),
       },
       {
+        path: 'finishCollection/',
+        component: () => import('../views/FinishCollection.vue'),
+      },
+      {
         path: 'login',
         component: () => import('../views/Login.vue'),
       },

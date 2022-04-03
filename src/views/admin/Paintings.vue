@@ -1,77 +1,71 @@
 <template>
+  <Loading :active="isLoading" :z-index="1060"></Loading>
   <h1>畫作管理</h1>
-  <div>
-    <Loading :active="isLoading" :z-index="1060"></Loading>
-    <div class="text-end mt-4">
-      <button class="btn btn-primary" type="button" @click="openPaintingModal(true)">
-        建立畫作
-      </button>
-    </div>
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th width="120">序號</th>
-          <th width="120">分類</th>
-          <th>畫作名稱</th>
-          <th>畫作</th>
-          <th width="120">年份</th>
-          <th width="120">單位</th>
-          <th width="120">尺寸</th>
-          <th width="120">售價</th>
-          <th width="100">是否啟用</th>
-          <th width="200">編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(painting, index) in paintings" :key="painting.id">
-          <td>{{ index + 1 }}</td>
-          <td>{{ painting.category }}</td>
-          <td>{{ painting.title }}</td>
-          <td><img :src="painting.imageUrl" style="height: 100px" alt="" /></td>
-          <td>{{ painting.year }}</td>
-          <td>{{ painting.unit }}</td>
-          <td class="text-right">{{ painting.size }}</td>
-          <td class="text-right">{{ painting.price }}</td>
-          <td>
-            <span v-if="painting.is_enabled" class="text-success">啟用</span>
-            <span v-else>未啟用</span>
-          </td>
-          <td>
-            <div class="btn-group">
-              <button
-                class="btn btn-outline-primary btn-sm"
-                type="button"
-                @click="openPaintingModal(false, painting)"
-              >
-                編輯
-              </button>
-              <button
-                class="btn btn-outline-danger btn-sm"
-                type="button"
-                @click="openDeleteModal(painting)"
-              >
-                刪除
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-      <Pagination :pages="pagination" @emit-page="getPaintings"></Pagination>
-    </div>
-    <PaintingModal
-      ref="paintingModal"
-      :painting="tempPainting"
-      :isNew="isNew"
-      @update-painting="updatePainting"
-    ></PaintingModal>
-    <DeleteModal
-      ref="deleteModal"
-      :item="tempPainting"
-      @delete-item="deletePainting"
-    ></DeleteModal>
+  <div class="text-end">
+    <button class="btn btn-primary text-white" type="button" @click="openPaintingModal(true)">
+      建立畫作
+    </button>
   </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="120">序號</th>
+        <th width="120">分類</th>
+        <th>畫作名稱</th>
+        <th>畫作</th>
+        <th width="120">年份</th>
+        <th width="120">單位</th>
+        <th width="120">尺寸</th>
+        <th width="120">售價</th>
+        <th width="100">是否啟用</th>
+        <th width="200">編輯</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(painting, index) in paintings" :key="painting.id">
+        <td>{{ index + 1 }}</td>
+        <td>{{ painting.category }}</td>
+        <td>{{ painting.title }}</td>
+        <td><img :src="painting.imageUrl" style="height: 100px" alt="" /></td>
+        <td>{{ painting.year }}</td>
+        <td>{{ painting.unit }}</td>
+        <td class="text-right">{{ painting.size }}</td>
+        <td class="text-right">{{ painting.price }}</td>
+        <td>
+          <span v-if="painting.is_enabled" class="text-success">啟用</span>
+          <span v-else>未啟用</span>
+        </td>
+        <td>
+          <div class="btn-group">
+            <button
+              class="btn btn-outline-primary btn-sm"
+              type="button"
+              @click="openPaintingModal(false, painting)"
+            >
+              編輯
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              type="button"
+              @click="openDeleteModal(painting)"
+            >
+              刪除
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <Pagination :pages="pagination" @emit-page="getPaintings"></Pagination>
+  </div>
+  <PaintingModal
+    ref="paintingModal"
+    :painting="tempPainting"
+    :isNew="isNew"
+    @update-painting="updatePainting"
+  ></PaintingModal>
+  <DeleteModal ref="deleteModal" :item="tempPainting" @delete-item="deletePainting"></DeleteModal>
 </template>
 
 <script>
@@ -154,7 +148,9 @@ export default {
     },
     deletePainting(paintingId) {
       this.$http
-        .delete(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${paintingId}`)
+        .delete(
+          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${paintingId}`,
+        )
         .then((res) => {
           this.getPaintings(this.pagination.current_page);
           this.isLoading = false;

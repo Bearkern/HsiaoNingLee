@@ -18,6 +18,11 @@
       </div>
       <ul class="nav">
         <li class="ms-3">
+          <router-link class="text-white" to="/admin"
+            ><i class="bi bi-gear-fill fs-3"></i></router-link
+          >
+        </li>
+        <li class="ms-3">
           <a class="text-white" href="https://github.com/Bearkern/HsiaoNingLee" target="_blank"
             ><i class="bi bi-github fs-3"></i
           ></a>
@@ -36,7 +41,7 @@
 .col span {
   display: block;
 }
-@media (min-width: 576px) {
+@include media-breakpoint-up(sm) {
   .col span {
     display: inline;
   }

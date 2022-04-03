@@ -1,6 +1,6 @@
 <template>
-  <div class="container pt-5 pt-md-6 pt-lg-7">
-    <Loading :active="isLoading" :z-index="1000"></Loading>
+  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <div class="container pt-6 pt-lg-7">
     <swiper
       :slides-per-view="1"
       :space-between="0"
@@ -16,7 +16,7 @@
       </swiper-slide>
     </swiper>
 
-    <ul class="nav nav-tabs mt-4">
+    <ul class="nav nav-tabs">
       <li class="nav-item">
         <a
           href="#"
@@ -39,46 +39,44 @@
       </li>
     </ul>
 
-    <div class="container mt-4">
-      <ul class="painting-card list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4">
-        <li v-for="painting in paintings" :key="painting.id" class="col position-relative mt-3">
-          <span class="tag">{{ painting.category }}</span>
-          <div
-            class="card-image border border-bottom-0 border-primary rounded-top"
-            :style="{ backgroundImage: `url(${painting.imageUrl})` }"
-          ></div>
-          <div class="painting-card-info d-flex align-items-center justify-content-around">
-            <i class="favorite bi bi-suit-heart fs-4"></i>
-            <h3>{{ painting.title }}</h3>
-            <span>{{ painting.size }}</span>
-          </div>
-          <button
-            class="card-btn btn btn-secondary"
-            :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
-            @click="getPainting(painting.id)"
-          >
-            <span
-              class="spinner-border spinner-grow-sm"
-              v-if="state.paintingLoading === painting.id"
-            ></span>
-            欣賞畫作
-          </button>
-          <button
-            class="card-btn btn btn-primary"
-            :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
-            @click="addToCollection(painting.id)"
-          >
-            <span
-              class="spinner-border spinner-grow-sm"
-              v-if="state.paintingLoading === painting.id"
-            ></span>
-            加入收藏
-          </button>
-        </li>
-      </ul>
-    </div>
+    <ul class="list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4">
+      <li v-for="painting in paintings" :key="painting.id" class="col position-relative mt-4">
+        <span class="tag text-white">{{ painting.category }}</span>
+        <div
+          class="card-image border border-bottom-0 border-primary rounded-top"
+          :style="{ backgroundImage: `url(${painting.imageUrl})` }"
+        ></div>
+        <div class="painting-card-info d-flex align-items-center justify-content-around">
+          <i class="favorite bi bi-suit-heart fs-4 text-white"></i>
+          <h3>{{ painting.title }}</h3>
+          <span>{{ painting.size }}</span>
+        </div>
+        <button
+          class="card-btn btn btn-info"
+          :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
+          @click="getPainting(painting.id)"
+        >
+          <span
+            class="spinner-border spinner-grow-sm"
+            v-if="state.paintingLoading === painting.id"
+          ></span>
+          欣賞畫作
+        </button>
+        <button
+          class="card-btn btn btn-primary text-white"
+          :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
+          @click="addToCollection(painting.id, painting.title)"
+        >
+          <span
+            class="spinner-border spinner-grow-sm"
+            v-if="state.paintingLoading === painting.id"
+          ></span>
+          加入收藏
+        </button>
+      </li>
+    </ul>
 
-    <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center my-4">
       <PaginationVue :pages="pagination" @emit-page="getPaintings"></PaginationVue>
     </div>
   </div>
@@ -90,6 +88,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
+import emitter from '@/utilities/mitt';
 import PaginationVue from '@/components/Pagination.vue';
 
 export default {
@@ -99,7 +98,6 @@ export default {
       paintings: [],
       category: '',
       allPaintings: [],
-      painting: {},
       state: { paintingLoading: '' },
       paintingsByCategory: [],
       pagination: {},
@@ -148,8 +146,7 @@ export default {
     getPainting(id) {
       this.$router.push(`/painting/${id}`);
     },
-    addToCollection(id, qty = 1) {
-      this.isLoading = true;
+    addToCollection(id, title, qty = 1) {
       this.state.paintingLoading = id;
       const collection = { product_id: id, qty };
       this.$http
@@ -157,14 +154,13 @@ export default {
           data: collection,
         })
         .then((res) => {
-          this.isLoading = false;
           this.state.paintingLoading = '';
-          this.$httpMessageState(res, '加入收藏');
+          emitter.emit('get-collection');
+          this.$httpMessageState(res, '加入收藏', title);
         })
         .catch((err) => {
-          this.isLoading = false;
           this.state.paintingLoading = '';
-          this.$httpMessageState(err, '加入收藏');
+          this.$httpMessageState(err, '加入收藏', title);
         });
     },
   },
@@ -178,6 +174,7 @@ export default {
 <style lang="scss" scoped>
 .swiper {
   display: none;
+  margin-bottom: 1.5rem;
 }
 .nav-tabs {
   border-bottom: 0;
@@ -185,17 +182,12 @@ export default {
 .nav-item {
   border-bottom: 1px solid $french-lilac-dark1;
 }
-.painting-card {
-  margin-left: calc(-1 * var(--bs-gutter-x));
-  margin-right: calc(-1 * var(--bs-gutter-x));
-}
 .tag {
   position: absolute;
   left: 20px;
   top: 0;
   padding: 10px;
   background-color: $martinique;
-  color: $white;
   writing-mode: vertical-lr;
   letter-spacing: 5px;
 }
@@ -213,7 +205,6 @@ export default {
     position: absolute;
     top: 10px;
     right: 20px;
-    color: $white;
     &:hover {
       cursor: pointer;
     }
@@ -230,24 +221,21 @@ export default {
   }
 }
 .card-btn {
-  color: $white;
   width: 50%;
   margin-top: -1px;
-  &:hover {
-    color: $white;
-  }
 }
 @include media-breakpoint-up(md) {
   .swiper {
     display: block;
   }
   .swiper-painting {
-    height: calc(35vh);
+    height: 35vh;
     background-position: center center;
     background-size: cover;
   }
   .nav-tabs {
-    border-bottom: 1px solid $french-lilac-dark1; }
+    border-bottom: 1px solid $french-lilac-dark1;
+  }
 
   .nav-item {
     border-bottom: 0;
@@ -255,7 +243,7 @@ export default {
 }
 @include media-breakpoint-up(lg) {
   .swiper-painting {
-    height: calc(60vh);
+    height: 60vh;
   }
 }
 </style>

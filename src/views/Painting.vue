@@ -1,6 +1,6 @@
 <template>
-  <div class="container pt-6">
     <Loading :active="isLoading" :z-index="1060"></Loading>
+  <div class="container pt-6 pt-lg-7">
     <nav aria-label="breadcrumb" class="fs-5">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -12,7 +12,10 @@
     <div class="row justify-content-center">
       <div class="painting-group col-12 col-lg-8 d-flex justify-content-center">
         <div class="painting-frame">
-          <div class="painting-image" :style="{backgroundImage: `url(${painting.imageUrl})`}"></div>
+          <div
+            class="painting-image"
+            :style="{ backgroundImage: `url(${painting.imageUrl})` }"
+          ></div>
         </div>
       </div>
       <div class="painting-detail col-12 col-lg-4 my-3 d-flex flex-column">
@@ -25,7 +28,16 @@
         </h3>
         <h3>創作理念：</h3>
         <p>{{ painting.description }}</p>
-        <button type="button" class="btn btn-outline-primary" @click="addToCollection(painting.id)">
+        <button
+          type="button"
+          class="btn btn-primary text-white"
+          :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
+          @click="addToCollection(painting.id, painting.title)"
+        >
+          <span
+            class="spinner-border spinner-grow-sm"
+            v-if="state.paintingLoading === painting.id"
+          ></span>
           加入收藏
         </button>
       </div>
@@ -34,12 +46,15 @@
 </template>
 
 <script>
+import emitter from '@/utilities/mitt';
+
 export default {
   data() {
     return {
       isLoading: false,
       id: '',
       painting: {},
+      state: { paintingLoading: '' },
     };
   },
   methods: {
@@ -56,9 +71,8 @@ export default {
           this.$httpMessageState(res.response, '錯誤訊息');
         });
     },
-    addToCollection(id, qty = 1) {
-      this.isLoading = true;
-
+    addToCollection(id, title, qty = 1) {
+      this.state.paintingLoading = id;
       const collection = {
         product_id: id,
         qty,
@@ -69,11 +83,12 @@ export default {
           data: collection,
         })
         .then((res) => {
-          this.isLoading = false;
-          this.$httpMessageState(res, '加入收藏');
+          emitter.emit('get-collection');
+          this.state.paintingLoading = '';
+          this.$httpMessageState(res, '加入收藏', title);
         })
         .catch((err) => {
-          this.isLoading = false;
+          this.state.paintingLoading = '';
           this.$httpMessageState(err, '加入收藏');
         });
     },
@@ -89,7 +104,9 @@ export default {
 .breadcrumb-item a {
   text-decoration: none;
 }
-.painting-frame { @include painting-frame(200px, 80%, 8vh, 6vw); }
+.painting-frame {
+  @include painting-frame(200px, 80%, 8vh, 6vw);
+}
 
 .painting-detail {
   h2 {
@@ -110,11 +127,6 @@ export default {
     color: $martinique-light2;
     font-size: 1.25rem;
   }
-  button {
-    &:hover {
-      color: $white;
-    }
-  }
 }
 
 @include media-breakpoint-up(md) {
@@ -123,7 +135,8 @@ export default {
   }
 }
 @include media-breakpoint-up(lg) {
-.painting-frame { @include painting-frame(500px, 100%, 3vw, 5vh); }
-
+  .painting-frame {
+    @include painting-frame(500px, 100%, 3vw, 5vh);
+  }
 }
 </style>

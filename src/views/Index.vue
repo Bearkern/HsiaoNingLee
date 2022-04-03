@@ -1,8 +1,10 @@
 <template>
-  <div class="container-fluid p-0 min-vh-100">
+  <div class="container-fluid p-0">
     <Navbar></Navbar>
     <ToastMessage></ToastMessage>
-    <router-view />
+    <div class="wrapper">
+      <router-view />
+    </div>
     <Footer></Footer>
   </div>
 </template>
@@ -26,3 +28,19 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.wrapper {
+  min-height: calc(100vh - 156.668px);
+}
+@include media-breakpoint-up(md) {
+  .wrapper {
+    min-height: calc(100vh - 138.578px);
+  }
+}
+@include media-breakpoint-up(lg) {
+  .wrapper {
+    min-height: calc(100vh - 90px);
+  }
+}
+</style>

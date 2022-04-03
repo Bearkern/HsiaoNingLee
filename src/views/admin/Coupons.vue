@@ -1,63 +1,54 @@
 <template>
+  <Loading :active="isLoading" :z-index="1060"></Loading>
   <h1>優惠券管理</h1>
-  <div>
-    <Loading :active="isLoading" :z-index="1060"></Loading>
-    <div class="text-end mt-4">
-      <button class="btn btn-primary" type="button" @click="openCouponModal(true)">
-        建立新的優惠券
-      </button>
-    </div>
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th>名稱</th>
-          <th>折扣百分比</th>
-          <th>到期日</th>
-          <th>是否啟用</th>
-          <th>編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="coupon in coupons" :key="coupon.id">
-          <td>{{ coupon.title }}</td>
-          <td>{{ coupon.percent }} %</td>
-          <td>{{ $filters.date(coupon.due_date) }}</td>
-          <td>
-            <span v-if="coupon.is_enabled" class="text-success">啟用</span>
-            <span v-else class="text-muted">未啟用</span>
-          </td>
-          <td>
-            <div class="btn-group">
-              <button
-                class="btn btn-outline-primary btn-sm"
-                @click="openCouponModal(false, coupon)"
-              >
-                編輯
-              </button>
-              <button class="btn btn-outline-danger btn-sm" @click="openDeleteModal(coupon)">
-                刪除
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-      <Pagination :pages="pagination" @emit-page="getCoupons"></Pagination>
-    </div>
-
-    <CouponModal
-      :coupon="tempCoupon"
-      @update-coupon="updateCoupon"
-      ref="couponModal"
-      :isNew="isNew"
-    ></CouponModal>
-    <DeleteModal
-      :item="tempCoupon"
-      @delete-item="deleteCoupon"
-      ref="deleteModal"
-    ></DeleteModal>
+  <div class="text-end">
+    <button class="btn btn-primary text-white" type="button" @click="openCouponModal(true)">
+      建立新的優惠券
+    </button>
   </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>名稱</th>
+        <th>折扣百分比</th>
+        <th>到期日</th>
+        <th>是否啟用</th>
+        <th>編輯</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="coupon in coupons" :key="coupon.id">
+        <td>{{ coupon.title }}</td>
+        <td>{{ coupon.percent }} %</td>
+        <td>{{ $filters.date(coupon.due_date) }}</td>
+        <td>
+          <span v-if="coupon.is_enabled" class="text-success">啟用</span>
+          <span v-else class="text-muted">未啟用</span>
+        </td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-outline-primary btn-sm" @click="openCouponModal(false, coupon)">
+              編輯
+            </button>
+            <button class="btn btn-outline-danger btn-sm" @click="openDeleteModal(coupon)">
+              刪除
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <Pagination :pages="pagination" @emit-page="getCoupons"></Pagination>
+  </div>
+
+  <CouponModal
+    :coupon="tempCoupon"
+    @update-coupon="updateCoupon"
+    ref="couponModal"
+    :isNew="isNew"
+  ></CouponModal>
+  <DeleteModal :item="tempCoupon" @delete-item="deleteCoupon" ref="deleteModal"></DeleteModal>
 </template>
 
 <script>
@@ -84,7 +75,9 @@ export default {
     getCoupons(page = 1) {
       this.isLoading = true;
       this.$http
-        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`)
+        .get(
+          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`,
+        )
         .then((res) => {
           this.coupons = res.data.coupons;
           this.pagination = res.data.pagination;
@@ -139,7 +132,9 @@ export default {
       this.isLoading = true;
 
       this.$http
-        .delete(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${couponId}`)
+        .delete(
+          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${couponId}`,
+        )
         .then((res) => {
           this.getCoupons();
           this.$refs.deleteModal.closeModal();
