@@ -54,7 +54,7 @@
                   @change="uploadImage"
                 />
               </div>
-              <img class="img-fluid" :src="tempPainting.imageUrl" />
+              <img class="img-fluid" :src="tempPainting.imageUrl" :alt="tempPainting.title" />
             </div>
             <div class="col-sm-8">
               <div class="mb-3">

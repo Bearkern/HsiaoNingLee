@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060" />
   <h1>收藏者資料管理</h1>
   <table class="table">
     <thead>
@@ -48,15 +48,15 @@
           <td>
             <div class="btn-group">
               <button
-                class="btn btn-outline-primary btn-sm"
                 type="button"
+                class="btn btn-outline-primary btn-sm"
                 @click="openCollectionModal(item)"
               >
                 檢視
               </button>
               <button
-                class="btn btn-outline-danger btn-sm"
                 type="button"
+                class="btn btn-outline-danger btn-sm"
                 @click="openDeleteModal(item)"
               >
                 刪除
@@ -68,18 +68,14 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <Pagination :pages="pagination" @emit-page="getCollections"></Pagination>
+    <Pagination :pages="pagination" @emit-page="getCollections" />
   </div>
   <CollectionModal
     ref="collectionModal"
     :collection="tempCollection"
     @update-payment="updatePayment"
-  ></CollectionModal>
-  <DeleteModal
-    ref="deleteModal"
-    :item="tempCollection"
-    @delete-item="deleteCollection"
-  ></DeleteModal>
+  />
+  <DeleteModal ref="deleteModal" :item="tempCollection" @delete-item="deleteCollection" />
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
   <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed bg-dark w-100">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/" @click="closeNavHam">李曉寧水彩畫家</router-link>
+      <RouterLink class="navbar-brand" to="/" @click="closeNavHam">李曉寧水彩畫家</RouterLink>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,21 +17,19 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav" ref="collapse">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/paintings" @click="closeNavHam"
-              >水彩創作</router-link
-            >
+            <RouterLink class="nav-link" to="/paintings" @click="closeNavHam">水彩創作</RouterLink>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item collection">
-            <router-link class="nav-link" to="/collections" @click="closeNavHam">
+            <RouterLink class="nav-link" to="/collections" @click="closeNavHam">
               <i class="bi bi-collection-fill fs-3 pe-3 position-relative"
                 ><em class="translate-middle badge rounded-pill bg-danger fs-6">{{
                   collectionData.carts.length
                 }}</em>
               </i>
               <span>收藏</span>
-            </router-link>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -41,7 +39,7 @@
 
 <script>
 import collapseMixin from '@/mixins/collapseMixin';
-import emitter from '@/utilities/mitt';
+import emitter from '@/utilities/emitter';
 
 export default {
   data() {

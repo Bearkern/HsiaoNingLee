@@ -1,4 +1,4 @@
-import emitter from '@/utilities/mitt';
+import emitter from '@/utilities/emitter';
 
 export default function (response, title = '更新', painting = '') {
   if (response.data.success) {

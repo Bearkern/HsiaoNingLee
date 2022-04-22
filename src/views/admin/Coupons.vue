@@ -1,8 +1,8 @@
 <template>
-  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060" />
   <h1>優惠券管理</h1>
   <div class="text-end">
-    <button class="btn btn-primary text-white" type="button" @click="openCouponModal(true)">
+    <button type="button" class="btn btn-primary text-white" @click="openCouponModal(true)">
       建立新的優惠券
     </button>
   </div>
@@ -27,10 +27,18 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm" @click="openCouponModal(false, coupon)">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              @click="openCouponModal(false, coupon)"
+            >
               編輯
             </button>
-            <button class="btn btn-outline-danger btn-sm" @click="openDeleteModal(coupon)">
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              @click="openDeleteModal(coupon)"
+            >
               刪除
             </button>
           </div>
@@ -39,7 +47,7 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <Pagination :pages="pagination" @emit-page="getCoupons"></Pagination>
+    <Pagination :pages="pagination" @emit-page="getCoupons" />
   </div>
 
   <CouponModal
@@ -47,8 +55,8 @@
     @update-coupon="updateCoupon"
     ref="couponModal"
     :isNew="isNew"
-  ></CouponModal>
-  <DeleteModal :item="tempCoupon" @delete-item="deleteCoupon" ref="deleteModal"></DeleteModal>
+  />
+  <DeleteModal :item="tempCoupon" @delete-item="deleteCoupon" ref="deleteModal" />
 </template>
 
 <script>

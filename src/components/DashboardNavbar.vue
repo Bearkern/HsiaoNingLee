@@ -2,7 +2,7 @@
   <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed bg-info w-100">
     <div class="container-fluid">
       <ToastMessage></ToastMessage>
-      <router-link class="navbar-brand" to="/admin" @click="closeNavHam">畫作管理</router-link>
+      <RouterLink class="navbar-brand" to="/admin" @click="closeNavHam">畫作管理</RouterLink>
       <button
         class="navbar-toggler"
         type="button"
@@ -18,21 +18,21 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav" ref="collapse">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin/collections" @click="closeNavHam"
-              >收藏者資料管理</router-link
+            <RouterLink class="nav-link" to="/admin/collections" @click="closeNavHam"
+              >收藏者資料管理</RouterLink
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin/coupons" @click="closeNavHam">優惠券</router-link>
+            <RouterLink class="nav-link" to="/admin/coupons" @click="closeNavHam">優惠券</RouterLink>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin/posts" @click="closeNavHam">貼文</router-link>
+            <RouterLink class="nav-link" to="/admin/posts" @click="closeNavHam">貼文</RouterLink>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/">回前台</router-link>
+            <RouterLink class="nav-link" to="/">回前台</RouterLink>
           </li>
         </ul>
-        <button class="btn btn-primary text-white" @click="logout">登出</button>
+        <button type="button" class="btn btn-primary text-white" @click="logout">登出</button>
       </div>
     </div>
   </nav>

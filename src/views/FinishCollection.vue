@@ -3,9 +3,9 @@
     <div class="hydrangea mb-4"></div>
     <h2>已完成建檔</h2>
     <p>如有畫展訊息會再寄 email 通知，非常感謝您欣賞藝術家的創作。</p>
-    <router-link to="/paintings" class="go-painting btn btn-primary text-white"
+    <RouterLink to="/paintings" class="go-painting btn btn-primary text-white"
       >前往畫作
-    </router-link>
+    </RouterLink>
   </div>
 </template>
 

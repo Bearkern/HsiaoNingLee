@@ -1,8 +1,8 @@
 <template>
-  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060" />
   <h1>畫作管理</h1>
   <div class="text-end">
-    <button class="btn btn-primary text-white" type="button" @click="openPaintingModal(true)">
+    <button type="button" class="btn btn-primary text-white" @click="openPaintingModal(true)">
       建立畫作
     </button>
   </div>
@@ -26,7 +26,9 @@
         <td>{{ index + 1 }}</td>
         <td>{{ painting.category }}</td>
         <td>{{ painting.title }}</td>
-        <td><img :src="painting.imageUrl" style="height: 100px" alt="" /></td>
+        <td>
+          <img :src="painting.imageUrl" style="height: 100px" :alt="painting.title" />
+        </td>
         <td>{{ painting.year }}</td>
         <td>{{ painting.unit }}</td>
         <td class="text-right">{{ painting.size }}</td>
@@ -38,15 +40,15 @@
         <td>
           <div class="btn-group">
             <button
-              class="btn btn-outline-primary btn-sm"
               type="button"
+              class="btn btn-outline-primary btn-sm"
               @click="openPaintingModal(false, painting)"
             >
               編輯
             </button>
             <button
-              class="btn btn-outline-danger btn-sm"
               type="button"
+              class="btn btn-outline-danger btn-sm"
               @click="openDeleteModal(painting)"
             >
               刪除
@@ -57,15 +59,15 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <Pagination :pages="pagination" @emit-page="getPaintings"></Pagination>
+    <Pagination :pages="pagination" @emit-page="getPaintings" />
   </div>
   <PaintingModal
     ref="paintingModal"
     :painting="tempPainting"
     :isNew="isNew"
     @update-painting="updatePainting"
-  ></PaintingModal>
-  <DeleteModal ref="deleteModal" :item="tempPainting" @delete-item="deletePainting"></DeleteModal>
+  />
+  <DeleteModal ref="deleteModal" :item="tempPainting" @delete-item="deletePainting" />
 </template>
 
 <script>

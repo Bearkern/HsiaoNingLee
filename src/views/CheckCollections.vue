@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060" />
   <div class="collect-group container row pt-6 pt-lg-7 mb-4 mx-auto">
     <h2>確認收藏者資訊</h2>
 
@@ -9,7 +9,8 @@
         <thead>
           <tr>
             <th>
-              畫作<span class="d-sm-none">資訊</span>
+              畫作
+              <span class="d-sm-none">資訊</span>
               <span class="d-none d-sm-inline-block">名稱</span>
             </th>
             <th>畫作</th>
@@ -63,7 +64,7 @@
         </tbody>
       </table>
       <div class="text-end">
-        <button class="btn btn-primary text-white" type="button" @click="checkCollections">
+        <button type="button" class="btn btn-primary text-white" @click="checkCollections">
           確認資料正確
         </button>
       </div>

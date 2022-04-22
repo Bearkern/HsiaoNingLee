@@ -1,17 +1,18 @@
 <template>
-  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060" />
   <div class="container pt-6 pt-lg-7 mb-4">
     <h3>收藏畫作須知</h3>
     <ul>
-      <li><p>填寫收藏者資料僅做為建檔，通知藝術家畫展資訊使用。</p></li>
+      <li>填寫收藏者資料僅做為建檔，通知藝術家畫展資訊使用。</li>
       <li>
         有意收藏畫作者，請直接私訊李曉寧藝術家
         <a
           href="https://www.facebook.com/leehsiaolin"
           class="mb-3 me-2 mb-md-0 text-primary text-decoration-none lh-1"
           target="_blank"
-          ><i class="bi bi-facebook fs-3"></i
-        ></a>
+        >
+          <i class="bi bi-facebook fs-3"></i>
+        </a>
         或致電 0935-509498
       </li>
     </ul>
@@ -19,7 +20,7 @@
 
   <div v-if="!collections.carts.length" class="container empty-collection mb-4">
     <p class="d-inline-block">您目前沒有收藏任何畫作</p>
-    <router-link class="btn btn-primary text-white" to="/paintings">前往收藏</router-link>
+    <RouterLink class="btn btn-primary text-white" to="/paintings">前往收藏</RouterLink>
     <div class="bougainvillea mt-4"></div>
   </div>
 
@@ -30,13 +31,14 @@
         <thead>
           <tr>
             <th>
-              <botton class="btn btn-outline-danger" @click="removeCollections"
-                ><i class="bi bi-folder-x"></i
-              ></botton>
+              <button type="button" class="btn btn-outline-danger" @click="removeCollections">
+                <i class="bi bi-folder-x"></i>
+              </button>
             </th>
             <th>
-              畫作<span class="d-sm-none">資訊</span
-              ><span class="d-none d-sm-inline-block">名稱</span>
+              畫作
+              <span class="d-sm-none">資訊</span>
+              <span class="d-none d-sm-inline-block">名稱</span>
             </th>
             <th>畫作</th>
             <th class="table-responsive">年份</th>
@@ -46,13 +48,18 @@
         <tbody>
           <tr v-for="collection in collections.carts" :key="collection.id">
             <td>
-              <botton
+              <button
+                type="button"
                 class="btn btn-outline-danger"
-                :disabled="state.paintingLoading === painting.id"
+                :disabled="state.paintingLoading === collection.id"
                 @click="removeCollection(collection.id, collection.product.title)"
               >
+                <span
+                  class="spinner-border spinner-grow-sm"
+                  v-if="state.paintingLoading === collection.id"
+                ></span>
                 <i class="bi bi-folder-minus"></i>
-              </botton>
+              </button>
             </td>
             <td>
               <span class="badge bg-primary">{{ collection.product.category }}</span>
@@ -65,7 +72,6 @@
                 :style="{ backgroundImage: `url(${collection.product.imageUrl})` }"
               ></div>
             </td>
-
             <td class="table-responsive">{{ collection.product.year }}</td>
             <td class="table-responsive">{{ collection.product.size }}</td>
           </tr>
@@ -77,7 +83,7 @@
         <h3>收藏者資訊</h3>
         <Form ref="collectionForm" class="row mb-4" v-slot="{ errors }" @submit="sendCollections">
           <div class="col-12 col-md-4 col-lg-12 mb-2">
-            <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
+            <label for="name" class="form-label"> 姓名<span class="text-danger">*</span> </label>
             <Field
               id="name"
               name="姓名"
@@ -87,12 +93,12 @@
               :class="{ 'is-invalid': errors['姓名'] }"
               placeholder="請輸入姓名"
               rules="required"
-            ></Field>
-            <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+            />
+            <ErrorMessage name="姓名" class="invalid-feedback" />
           </div>
 
           <div class="col-12 col-md-8 col-lg-12 mb-2">
-            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+            <label for="email" class="form-label"> Email<span class="text-danger">*</span> </label>
             <Field
               id="email"
               name="email"
@@ -102,12 +108,12 @@
               :class="{ 'is-invalid': errors['email'] }"
               placeholder="請輸入 Email"
               rules="email|required"
-            ></Field>
-            <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
+            />
+            <ErrorMessage name="email" class="invalid-feedback" />
           </div>
 
           <div class="col-12 col-md-4 col-lg-12 mb-2">
-            <label for="tel" class="form-label">電話<span class="text-danger">*</span></label>
+            <label for="tel" class="form-label"> 電話<span class="text-danger">*</span> </label>
             <Field
               id="tel"
               name="電話"
@@ -117,12 +123,12 @@
               :class="{ 'is-invalid': errors['電話'] }"
               placeholder="請輸入電話"
               rules="required|min:8|max:10"
-            ></Field>
-            <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+            />
+            <ErrorMessage name="電話" class="invalid-feedback" />
           </div>
 
           <div class="col-12 col-md-8 col-lg-12 mb-2">
-            <label for="address" class="form-label">地址<span class="text-danger">*</span></label>
+            <label for="address" class="form-label"> 地址<span class="text-danger">*</span> </label>
             <Field
               id="address"
               name="地址"
@@ -132,8 +138,8 @@
               :class="{ 'is-invalid': errors['地址'] }"
               placeholder="請輸入地址"
               rules="required"
-            ></Field>
-            <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+            />
+            <ErrorMessage name="地址" class="invalid-feedback" />
           </div>
 
           <div class="mb-2">
@@ -146,12 +152,12 @@
               cols="30"
               rows="3"
               as="textarea"
-            ></Field>
+            />
           </div>
           <div class="text-end">
             <button
-              class="btn btn-primary text-white"
               type="submit"
+              class="btn btn-primary text-white"
               :disabled="!collections.carts.length"
             >
               填寫完成
@@ -164,7 +170,7 @@
 </template>
 
 <script>
-import emitter from '@/utilities/mitt';
+import emitter from '@/utilities/emitter';
 
 export default {
   data() {

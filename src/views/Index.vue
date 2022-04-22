@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid p-0">
-    <Navbar></Navbar>
-    <ToastMessage></ToastMessage>
+    <Navbar />
+    <ToastMessage />
     <div class="wrapper">
-      <router-view />
+      <RouterView />
     </div>
-    <Footer></Footer>
+    <Footer />
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 import ToastMessage from '@/components/ToastMessage.vue';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
-import emitter from '@/utilities/mitt';
+import emitter from '@/utilities/emitter';
 
 export default {
   provide() {
@@ -32,14 +32,10 @@ export default {
 <style lang="scss">
 .wrapper {
   min-height: calc(100vh - 156.668px);
-}
-@include media-breakpoint-up(md) {
-  .wrapper {
+  @media (min-width: 768px) {
     min-height: calc(100vh - 138.578px);
   }
-}
-@include media-breakpoint-up(lg) {
-  .wrapper {
+  @media (min-width: 992px) {
     min-height: calc(100vh - 90px);
   }
 }

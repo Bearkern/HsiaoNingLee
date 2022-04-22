@@ -1,12 +1,12 @@
 <template>
-  <div class="container-fluid banner px-4 d-flex align-items-center">
+  <div class="container-fluid banner px-4 d-flex align-items-center mb-5">
     <div class="description">
       <p class="text-white">
         畫筆下的「花」脫俗，篩去嬌媚，自展輕柔<br />
         畫筆下的「景」善美，引光入境，自說故事<br />
         畫筆下的「物」律動，流轉心情，自顯生命
       </p>
-      <router-link to="/paintings" class="go-painting text-white">前往創作</router-link>
+      <RouterLink to="/paintings" class="go-painting text-white">前往創作</RouterLink>
     </div>
     <img class="painter-icon" src="../assets/images/LeeHsiaoNing.jpeg" alt="Lee Hsiao Ning" />
   </div>
@@ -16,9 +16,9 @@
         <div class="hydrangea"></div>
       </li>
       <li class="col-md-7 col-lg-5 intro-text d-flex flex-column">
-        <h2>台灣水彩畫家 - <br />李曉寧 Hsiao-Ning Lee</h2>
+        <h2 class="mt-3 mt-md-0">台灣水彩畫家 - <br />李曉寧 Hsiao-Ning Lee</h2>
         <h3>出生</h3>
-        <p>1959年台灣屏東</p>
+        <p>1959 年台灣屏東</p>
         <h3>學歷</h3>
         <ul>
           <li>台北市立女師專音樂科畢業</li>
@@ -37,7 +37,7 @@
           <li>臺灣水彩專題精選系列「春華」水彩大展策展人</li>
         </ul>
         <h3>簡歷</h3>
-        <p>
+        <p class="mb-0">
           作品多次優選、佳作、入選於2015世界水彩大賽、全國美展、大墩美展、新北市美展、玉山美展、南瀛美展、新竹美展等。
         </p>
       </li>
@@ -145,12 +145,13 @@
 .intro-group {
   list-style: none;
   padding-left: 0;
+  margin-bottom: 30px;
 }
 .intro-image {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
+  // margin-bottom: 16px;
   div {
     width: 300px;
     height: 300px;
@@ -221,18 +222,6 @@
     height: 225px;
   }
   // banner-end
-
-  // intro-start
-  .intro-text {
-    h2 {
-      font-size: 2rem;
-    }
-    p,
-    li {
-      font-size: 1.5rem;
-    }
-  }
-  // intro-end
 }
 @include media-breakpoint-up(md) {
   // banner-start
@@ -267,26 +256,18 @@
 
   // intro-start
   .intro-text {
-    h3 {
-      font-size: 1.75rem;
-    }
     ul {
       margin-left: 1.75rem;
     }
   }
 
   .intro-image {
-    .hydrangea {
-      align-self: flex-start;
-    }
     .egg {
-      align-self: flex-end;
       height: 350px;
       width: 350px;
       border: 4px solid $kimberly-dark;
     }
     .pumpkin {
-      align-self: flex-start;
       height: 400px;
       width: 400px;
       border: 5px solid $french-lilac-dark1;

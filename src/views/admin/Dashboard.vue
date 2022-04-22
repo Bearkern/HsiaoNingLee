@@ -1,14 +1,14 @@
 <template>
-  <DashboardNavbar></DashboardNavbar>
+  <DashboardNavbar />
   <div class="container-fluid pt-6">
-    <ToastMessage></ToastMessage>
-    <router-view v-if="loginStatus" />
+    <ToastMessage />
+    <RouterView v-if="loginStatus" />
   </div>
 </template>
 
 <script>
 import DashboardNavbar from '@/components/DashboardNavbar.vue';
-import emitter from '@/utilities/mitt';
+import emitter from '@/utilities/emitter';
 import ToastMessage from '@/components/ToastMessage.vue';
 
 export default {

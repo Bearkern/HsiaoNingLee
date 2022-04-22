@@ -1,20 +1,20 @@
 <template>
-  <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060" />
   <div class="container pt-6 pt-lg-7">
-    <swiper
+    <Swiper
       :slides-per-view="1"
       :space-between="0"
       :modules="modules"
       navigation
       :pagination="{ clickable: true }"
     >
-      <swiper-slide v-for="painting in paintings" :key="painting.id">
+      <SwiperSlide v-for="painting in paintings" :key="painting.id">
         <div
           class="swiper-painting"
           :style="{ backgroundImage: `url(${painting.imageUrl})` }"
         ></div>
-      </swiper-slide>
-    </swiper>
+      </SwiperSlide>
+    </Swiper>
 
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -47,11 +47,13 @@
           :style="{ backgroundImage: `url(${painting.imageUrl})` }"
         ></div>
         <div class="painting-card-info d-flex align-items-center justify-content-around">
+          <i class="favorite bi bi-suit-heart fs-4 text-white"></i>
           <h3>{{ painting.title }}</h3>
           <span>{{ painting.size }}</span>
         </div>
         <button
-          class="card-btn btn btn-info"
+          type="button"
+          class="card-btn btn btn-info rounded-0 rounded-start"
           :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
           @click="getPainting(painting.id)"
         >
@@ -62,7 +64,8 @@
           欣賞畫作
         </button>
         <button
-          class="card-btn btn btn-primary text-white"
+          type="button"
+          class="card-btn btn btn-primary text-white rounded-0 rounded-end"
           :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
           @click="addToCollection(painting.id, painting.title)"
         >
@@ -76,7 +79,7 @@
     </ul>
 
     <div class="d-flex justify-content-center my-4">
-      <PaginationVue :pages="pagination" @emit-page="getPaintings"></PaginationVue>
+      <PaginationVue :pages="pagination" @emit-page="getPaintings" />
     </div>
   </div>
 </template>
@@ -87,7 +90,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
 import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
-import emitter from '@/utilities/mitt';
+import emitter from '@/utilities/emitter';
 import PaginationVue from '@/components/Pagination.vue';
 
 export default {
@@ -127,6 +130,7 @@ export default {
         });
     },
     getAllPaintings() {
+      this.isLoading = true;
       this.$http
         .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`)
         .then((res) => {
@@ -177,6 +181,10 @@ export default {
 }
 .nav-tabs {
   border-bottom: 0;
+  flex-wrap: nowrap;
+  display: -webkit-box;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 .nav-item {
   border-bottom: 1px solid $french-lilac-dark1;
@@ -200,6 +208,14 @@ export default {
   padding: 3px 0;
   border: 1px solid $french-lilac;
   border-top: none;
+  .favorite {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   h3 {
     width: 55%;
     font-size: 1.25rem;
@@ -234,7 +250,7 @@ export default {
 }
 @include media-breakpoint-up(lg) {
   .swiper-painting {
-    height: 60vh;
+    height: 40vh;
   }
 }
 </style>

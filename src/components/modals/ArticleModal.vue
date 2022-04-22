@@ -59,7 +59,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 mb-1">
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">新增標籤</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm d-block w-100">
+                    新增標籤
+                  </button>
                 </div>
               </div>
               <div class="mb-3">

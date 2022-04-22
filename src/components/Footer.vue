@@ -16,21 +16,17 @@
           ></a>
         </span>
       </div>
-      <ul class="nav">
+
+      <ul class="col nav justify-content-end">
         <li class="ms-3">
-          <router-link class="text-white" to="/admin"
-            ><i class="bi bi-gear-fill fs-3"></i></router-link
-          >
+          <a class="text-white" href="https://github.com/Bearkern/HsiaoNingLee" target="_blank">
+            <i class="bi bi-github fs-3"></i>
+          </a>
         </li>
         <li class="ms-3">
-          <a class="text-white" href="https://github.com/Bearkern/HsiaoNingLee" target="_blank"
-            ><i class="bi bi-github fs-3"></i
-          ></a>
-        </li>
-        <li class="ms-3">
-          <a class="text-white" href="mailto:haolin1224@gmail.com"
-            ><i class="bi bi-envelope-fill fs-3"></i
-          ></a>
+          <a class="text-white" href="mailto:haolin1224@gmail.com">
+            <i class="bi bi-envelope-fill fs-3"></i>
+          </a>
         </li>
       </ul>
     </footer>
