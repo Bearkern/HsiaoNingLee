@@ -8,9 +8,8 @@
       </p>
       <RouterLink to="/paintings" class="go-painting text-white">前往創作</RouterLink>
     </div>
-    <img class="painter-icon" src="../assets/images/LeeHsiaoNing.jpeg" alt="Lee Hsiao Ning" />
   </div>
-  <div class="container intro my-4">
+  <div class="container my-4">
     <ul class="intro-group row flex-row-reverse">
       <li class="col-md-5 col-lg-6 intro-image">
         <div class="hydrangea"></div>
@@ -90,6 +89,33 @@
       </li>
     </ul>
   </div>
+  <div class="painter-intro bg-info">
+    <div class="container row py-4 px-0 mx-auto">
+      <div class="col-md-4 col-lg-4 align-self-center d-flex justify-content-center mb-4">
+        <img class="painter-icon" src="../assets/images/LeeHsiaoNing.jpeg" alt="LeeHsiaoNing" />
+      </div>
+      <div class="col-md-8 col-lg-4 self-intro mb-4">
+        <h2>藝術家自述</h2>
+        <p>美在生活．心在說話。</p>
+        <p>我認真的生活，細細品味生命的精彩；面對每一次的創作，從心歸零，濾盡雜質見純粹。</p>
+        <p>我用心地體會，時時享受心靈的豐美；真誠無偽下筆，從繁入簡，由濃趨淡尋剔透。</p>
+        <p>眼和心，常被定格在複雜且多層次的景物中。</p>
+        <p>一幅幅的作品，收藏了內心深處細膩的感動；水漂動、彩交織，一隻畫筆，心之顯影。</p>
+      </div>
+      <div class="col-lg-4 painting-style">
+        <h2>創作理念</h2>
+        <p>
+          畫如其人，似有姿態，實則了然於心，不華麗的用色，不張狂的運筆，娓娓道出生活的明暗；
+          循著每一幅畫，將探看我心的軌跡，以及無須言說的人生，幾番悲喜聚散與跌宕轉折，聆聽畫譜出一首首動人的生命樂章。
+        </p>
+        <p>
+          期待透過豐富的層次及色彩，表現水彩的透明性與流動感，營造出虛實交錯的氛圍，將自身對音樂的感動融入於創作中，藉由作品傳達出對生命的愛與感動。
+          真心、執著、感性、專注，拾起畫筆娓娓道出創作心境的軌跡。
+          期待畫作不疾不徐的氣韻，緩緩傳遞平凡生活裡的真善美，尋見回歸內心平靜的喜樂。
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -129,29 +155,19 @@
     background-color: $martinique-light1;
   }
 }
-.painter-icon {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 50%;
-  transform: translateY(50%);
-  border: 3px solid $white;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
 // banner-end
 
 // intro-start
 .intro-group {
   list-style: none;
   padding-left: 0;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 .intro-image {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // margin-bottom: 16px;
+  margin-bottom: 8px;
   div {
     width: 300px;
     height: 300px;
@@ -205,6 +221,31 @@
 }
 // intro-end
 
+.painter-icon {
+  width: 300px;
+  height: 300px;
+  border: 3px solid $white;
+  border-radius: 50%;
+}
+
+.painter-intro {
+  margin: 0 auto;
+  h2 {
+    color: $white;
+    font-size: 1.75rem;
+    border-bottom: 1px solid $french-lilac;
+    padding-bottom: 5px;
+  }
+  p {
+    font-size: 1.25rem;
+    color: $white;
+  }
+}
+.painting-style {
+  p {
+    text-indent: 2.5rem;
+  }
+}
 @include media-breakpoint-up(sm) {
   // banner-start
   .description {
@@ -215,11 +256,6 @@
   }
   .go-painting {
     font-size: 1.5rem;
-  }
-  .painter-icon {
-    right: 5%;
-    width: 225px;
-    height: 225px;
   }
   // banner-end
 }
@@ -236,24 +272,16 @@
   .go-painting {
     font-size: 1.75rem;
   }
+  // banner-end
   .painter-icon {
-    right: 15%;
     width: 250px;
     height: 250px;
   }
-  // banner-end
+  .self-intro {
+    padding-left: 30px;
+  }
 }
 @include media-breakpoint-up(lg) {
-  // banner-start
-  .painter-icon {
-    bottom: 10%;
-    transform: translateY(0);
-    right: 10%;
-    width: 300px;
-    height: 300px;
-  }
-  // banner-end
-
   // intro-start
   .intro-text {
     ul {
@@ -265,19 +293,31 @@
     .egg {
       height: 350px;
       width: 350px;
-      border: 4px solid $kimberly-dark;
+      border-width: 4px;
     }
     .pumpkin {
       height: 400px;
       width: 400px;
-      border: 5px solid $french-lilac-dark1;
+      border-width: 5px;
     }
     .fish {
       height: 350px;
       width: 350px;
-      border: 4px solid $french-lilac;
+      border-width: 4px;
     }
   }
   // intro-end
+  .painter-icon {
+    width: 350px;
+    height: 350px;
+    border-width: 4px;
+  }
+  .self-intro {
+    padding-left: 12px;
+  }
+
+  .painting-style {
+    padding-left: 30px;
+  }
 }
 </style>
