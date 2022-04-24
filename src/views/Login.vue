@@ -1,7 +1,7 @@
 <template>
-  <div class="container pt-6 pt-lg-7">
+  <div class="container pt-5 pt-lg-7">
     <Loading :active="isLoading" :z-index="1060" />
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-4">
       <div class="col-lg-6 hydrangea mb-4"></div>
       <Form class="col-lg-6" v-slot="{ errors }" @submit="login">
         <div class="mb-2">
@@ -76,9 +76,12 @@ export default {
 
 <style lang="scss" scoped>
 .hydrangea {
-  height: 400px;
+  height: 200px;
   background-image: url('../assets/images/hydrangea.jpg');
   background-size: cover;
   background-position: center center;
+  @media (min-width: 768px) {
+    height: 400px;
+  }
 }
 </style>

@@ -19,6 +19,9 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/paintings" @click="closeNavHam">水彩創作</RouterLink>
           </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/enrol" @click="closeNavHam">課程資訊</RouterLink>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item collection">
