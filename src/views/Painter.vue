@@ -14,7 +14,7 @@
       <li class="col-md-5 col-lg-6 intro-image">
         <div class="hydrangea"></div>
       </li>
-      <li class="col-md-7 col-lg-5 intro-text d-flex flex-column">
+      <li class="col-md-7 col-lg-6 intro-text d-flex flex-column px-lg-6">
         <h2 class="mt-3 mt-md-0">台灣水彩畫家 - <br />李曉寧 Hsiao-Ning Lee</h2>
         <h3>出生</h3>
         <p>1959 年台灣屏東</p>
@@ -29,7 +29,7 @@
       <li class="col-md-5 col-lg-6 intro-image">
         <div class="egg"></div>
       </li>
-      <li class="col-md-7 col-lg-5 intro-text d-flex flex-column">
+      <li class="col-md-7 col-lg-6 intro-text d-flex flex-column px-lg-6">
         <h3>經歷</h3>
         <ul class="mb-3">
           <li>現任中華亞太水彩藝術協會理事</li>
@@ -45,7 +45,7 @@
       <li class="col-md-5 col-lg-6 intro-image">
         <div class="pumpkin"></div>
       </li>
-      <li class="col-md-7 col-lg-5 intro-text d-flex flex-column">
+      <li class="col-md-7 col-lg-6 intro-text d-flex flex-column px-lg-6">
         <h3>個展</h3>
         <ul>
           <li>2018國父紀念館「初曉迎繽」水彩個展</li>
@@ -60,7 +60,7 @@
       <li class="col-md-5 col-lg-6 intro-image">
         <div class="wood-carving"></div>
       </li>
-      <li class="col-md-7 col-lg-5 intro-text d-flex flex-column">
+      <li class="col-md-7 col-lg-6 intro-text d-flex flex-column px-lg-6">
         <h3>聯展</h3>
         <ul>
           <li>2021 獲邀韓國水彩節仁川水彩大展</li>
@@ -78,7 +78,7 @@
       <li class="col-md-5 col-lg-6 intro-image">
         <div class="fish"></div>
       </li>
-      <li class="col-md-7 col-lg-5 intro-text d-flex flex-column">
+      <li class="col-md-7 col-lg-6 intro-text d-flex flex-column px-lg-6">
         <h3>著作</h3>
         <ul>
           <li>2018「美在生活‧心在說話」畫冊</li>
@@ -89,9 +89,9 @@
       </li>
     </ul>
   </div>
-  <div class="painter-intro bg-info">
-    <div class="container row py-4 px-0 mx-auto">
-      <div class="col-md-4 col-lg-4 align-self-center d-flex justify-content-center mb-4">
+  <div class="painter-intro bg-light">
+    <div class="container row py-5 px-0 mx-auto">
+      <div class="col-md-4 col-lg-4 align-self-center d-flex justify-content-center mb-4 mb-lg-0">
         <img class="painter-icon" src="../assets/images/LeeHsiaoNing.jpeg" alt="LeeHsiaoNing" />
       </div>
       <div class="col-md-8 col-lg-4 self-intro mb-4">
@@ -136,14 +136,14 @@
   writing-mode: vertical-lr;
   letter-spacing: 3px;
   p {
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 0;
   }
 }
 .go-painting {
   align-self: flex-end;
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-decoration: none;
   writing-mode: vertical-lr;
   letter-spacing: 5px;
@@ -161,7 +161,7 @@
 .intro-group {
   list-style: none;
   padding-left: 0;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
 }
 .intro-image {
   display: flex;
@@ -199,12 +199,12 @@
 .intro-text {
   h2 {
     color: $kimberly-dark;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
   }
   h3 {
     color: $french-lilac-dark1;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     border-bottom: 1px solid $french-lilac-dark1;
     padding-bottom: 0.5rem;
   }
@@ -215,7 +215,7 @@
   p,
   li {
     color: $martinique-light2;
-    font-size: 1.25rem;
+    font-size: 1rem;
     list-style-image: url('../assets/images/favicon-16x16.png');
   }
 }
@@ -232,12 +232,12 @@
   margin: 0 auto;
   h2 {
     color: $white;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     border-bottom: 1px solid $french-lilac;
     padding-bottom: 5px;
   }
   p {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: $white;
   }
 }
@@ -250,12 +250,6 @@
   // banner-start
   .description {
     padding: 50px;
-    p {
-      font-size: 1.5rem;
-    }
-  }
-  .go-painting {
-    font-size: 1.5rem;
   }
   // banner-end
 }
@@ -265,12 +259,12 @@
     padding: 60px;
     margin-left: 15%;
     p {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       letter-spacing: 5px;
     }
   }
   .go-painting {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
   // banner-end
   .painter-icon {

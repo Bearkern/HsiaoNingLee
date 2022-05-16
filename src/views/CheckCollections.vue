@@ -64,7 +64,11 @@
         </tbody>
       </table>
       <div class="text-end">
-        <button type="button" class="btn btn-primary text-white" @click="checkCollections">
+        <button
+          type="button"
+          class="btn btn-primary text-white"
+          @click="checkCollections"
+        >
           確認資料正確
         </button>
       </div>

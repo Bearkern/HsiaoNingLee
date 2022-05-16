@@ -1,7 +1,7 @@
 <template>
   <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed bg-info w-100">
     <div class="container-fluid">
-      <ToastMessage></ToastMessage>
+      <ToastMessage />
       <RouterLink class="navbar-brand" to="/admin" @click="closeNavHam">畫作管理</RouterLink>
       <button
         class="navbar-toggler"

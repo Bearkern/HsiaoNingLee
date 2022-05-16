@@ -47,13 +47,19 @@
           :style="{ backgroundImage: `url(${painting.imageUrl})` }"
         ></div>
         <div class="painting-card-info d-flex align-items-center justify-content-around">
-          <i class="favorite bi bi-suit-heart fs-4 text-white"></i>
+          <a href="#" class="favorite" @click.prevent="toggleFavorite(painting.id)">
+            <i
+              v-if="favorite.includes(painting.id)"
+              class="bi bi-suit-heart-fill fs-4 text-white"
+            ></i>
+            <i v-else class="bi bi-suit-heart fs-4 text-white"></i>
+          </a>
           <h3>{{ painting.title }}</h3>
           <span>{{ painting.size }}</span>
         </div>
         <button
           type="button"
-          class="card-btn btn btn-info rounded-0 rounded-start"
+          class="card-btn btn btn-info btn-view"
           :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
           @click="getPainting(painting.id)"
         >
@@ -65,7 +71,7 @@
         </button>
         <button
           type="button"
-          class="card-btn btn btn-primary text-white rounded-0 rounded-end"
+          class="card-btn btn btn-primary text-white btn-collect"
           :disabled="state.paintingLoading === painting.id || !painting.is_enabled"
           @click="addToCollection(painting.id, painting.title)"
         >
@@ -104,6 +110,7 @@ export default {
       paintingsByCategory: [],
       pagination: {},
       modules: [Navigation, Pagination],
+      favorite: JSON.parse(localStorage.getItem('favorite')) || [],
     };
   },
   components: { Swiper, SwiperSlide, PaginationVue },
@@ -165,6 +172,22 @@ export default {
           this.state.paintingLoading = '';
           this.$httpMessageState(err, '加入收藏', title);
         });
+    },
+    toggleFavorite(id) {
+      const favoriteIndex = this.favorite.findIndex((paintingId) => paintingId === id);
+      if (favoriteIndex === -1) {
+        this.favorite.push(id);
+      } else {
+        this.favorite.splice(favoriteIndex, 1);
+      }
+    },
+  },
+  watch: {
+    favorite: {
+      handler() {
+        localStorage.setItem('favorite', JSON.stringify(this.favorite));
+      },
+      deep: true,
     },
   },
   mounted() {
@@ -231,6 +254,15 @@ export default {
   width: 50%;
   margin-top: -1px;
 }
+
+.btn-view {
+  border-radius: 0;
+  border-bottom-left-radius: 0.25rem;
+}
+.btn-collect {
+  border-radius: 0;
+  border-bottom-right-radius: 0.25rem;
+}
 @include media-breakpoint-up(md) {
   .swiper {
     display: block;
@@ -242,10 +274,11 @@ export default {
   }
   .nav-tabs {
     border-bottom: 1px solid $french-lilac-dark1;
+    overflow-y: visible;
+    overflow-x: visible;
   }
-
   .nav-item {
-    border-bottom: 0;
+    border-bottom: 0px;
   }
 }
 @include media-breakpoint-up(lg) {

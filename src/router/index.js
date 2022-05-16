@@ -30,8 +30,8 @@ const routes = [
         component: () => import('../views/FinishCollection.vue'),
       },
       {
-        path: 'enrol',
-        component: () => import('../views/Enrol.vue'),
+        path: 'enroll',
+        component: () => import('../views/Enroll.vue'),
       },
       {
         path: 'login',

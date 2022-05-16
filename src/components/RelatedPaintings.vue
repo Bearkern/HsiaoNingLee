@@ -1,9 +1,5 @@
 <template>
-  <Swiper
-    :breakpoints="swiperOptions.breakpoints"
-    :modules="modules"
-    navigation
-  >
+  <Swiper :breakpoints="swiperOptions.breakpoints" :modules="modules" navigation>
     <SwiperSlide v-for="painting in paintings" :key="painting.id">
       <ul class="list-unstyled col">
         <li class="col position-relative mt-4">
@@ -12,7 +8,13 @@
             :style="{ backgroundImage: `url(${painting.imageUrl})` }"
           ></div>
           <div class="painting-card-info d-flex align-items-center justify-content-around">
-            <i class="favorite bi bi-suit-heart fs-4 text-white"></i>
+            <a href="#" class="favorite" @click.prevent="toggleFavorite(painting.id)">
+              <i
+                v-if="favorite.includes(painting.id)"
+                class="bi bi-suit-heart-fill fs-4 text-white"
+              ></i>
+              <i v-else class="bi bi-suit-heart fs-4 text-white"></i>
+            </a>
             <h3>{{ painting.title }}</h3>
             <span>{{ painting.size }}</span>
           </div>
@@ -42,6 +44,7 @@ export default {
           992: { slidesPerView: 4, spaceBetween: 30 },
         },
       },
+      favorite: JSON.parse(localStorage.getItem('favorite')) || [],
     };
   },
   components: { Swiper, SwiperSlide },
@@ -60,6 +63,22 @@ export default {
     getPainting(id) {
       this.$router.push(`/painting/${id}`);
       this.$emit('get-painting', id);
+    },
+    toggleFavorite(id) {
+      const favoriteIndex = this.favorite.findIndex((paintingId) => paintingId === id);
+      if (favoriteIndex === -1) {
+        this.favorite.push(id);
+      } else {
+        this.favorite.splice(favoriteIndex, 1);
+      }
+    },
+  },
+  watch: {
+    favorite: {
+      handler() {
+        localStorage.setItem('favorite', JSON.stringify(this.favorite));
+      },
+      deep: true,
     },
   },
 };

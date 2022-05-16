@@ -1,7 +1,6 @@
 <template>
   <div class="container-fluid pt-6 pt-lg-7 mb-4">
     <div class="row">
-      <h2>李曉寧水彩畫教室</h2>
       <div class="course-info">
         <div class="course-bg offset-md-2 col-md-8 offset-lg-6 col-lg-5">
           <h3 class="text-white">線上課程資訊</h3>
@@ -9,9 +8,9 @@
             <li>
               授課堂數 (共 10 堂)：
               <ul class="painting-lessons">
-                <li>3月/ 03、10、17、24、31</li>
-                <li>4月/ 07、14、21、28</li>
-                <li class="mb-2">5月/ 5</li>
+                <li>5 月/ 19、26</li>
+                <li>6 月/ 02、09、16、23、30</li>
+                <li class="mb-2">7 月/ 07、14、21</li>
               </ul>
             </li>
             <li>
@@ -34,7 +33,7 @@
                   class="mb-3 text-decoration-none lh-1"
                   target="_blank"
                 >
-                  <i class="bi bi-facebook text-white fs-3"></i>
+                  <i class="bi bi-facebook text-white fs-4"></i>
                 </a>
                 私訊，或加曉寧老師的 LINE ID：hsiaolinlee 聯繫報名。
               </p>
@@ -75,7 +74,7 @@
         </ol>
       </div>
       <div class="col-lg-6 p-lg-0">
-        <div class="hydrangea"></div>
+        <div class="chrysanthemum"></div>
       </div>
     </div>
   </div>
@@ -84,12 +83,12 @@
 <style lang="scss" scoped>
 h2 {
   color: $kimberly-dark;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   margin-bottom: 20px;
 }
 h3 {
   color: $french-lilac-dark1;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   border-bottom: 1px solid $french-lilac-dark1;
   padding-bottom: 0.5rem;
 }
@@ -100,7 +99,7 @@ ul {
 p,
 li {
   color: $martinique-light2;
-  font-size: 1.25rem;
+  font-size: 1rem;
   list-style-image: url('../assets/images/favicon-16x16.png');
 }
 
@@ -133,13 +132,13 @@ ul.painting-lessons {
     list-style-image: none;
   }
 }
-.hydrangea {
+.chrysanthemum {
   border-radius: 10px;
   border: 1px solid $primary;
   height: 250px;
   background-size: cover;
   background-position: center center;
-  background-image: url('../assets/images/hydrangea2.jpg');
+  background-image: url('../assets/images/chrysanthemum.jpeg');
   @media (min-width: 768px) {
     height: 400px;
   }

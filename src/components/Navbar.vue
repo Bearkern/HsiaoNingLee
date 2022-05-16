@@ -1,5 +1,5 @@
 <template>
-  <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed bg-dark w-100">
+  <nav class="index-navbar navbar navbar-expand-lg navbar-dark position-fixed bg-light w-100">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/" @click="closeNavHam">李曉寧水彩畫家</RouterLink>
       <button
@@ -20,14 +20,14 @@
             <RouterLink class="nav-link" to="/paintings" @click="closeNavHam">水彩創作</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/enrol" @click="closeNavHam">課程資訊</RouterLink>
+            <RouterLink class="nav-link" to="/enroll" @click="closeNavHam">課程資訊</RouterLink>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item collection">
             <RouterLink class="nav-link" to="/collections" @click="closeNavHam">
               <i class="bi bi-collection-fill fs-3 pe-3 position-relative"
-                ><em class="translate-middle badge rounded-pill bg-danger fs-6">{{
+                ><em class="fst-normal translate-middle badge rounded-pill bg-danger fs-6">{{
                   collectionData.carts.length
                 }}</em>
               </i>
@@ -60,7 +60,9 @@ export default {
         .then((res) => {
           this.collectionData = res.data.data;
         })
-        .catch(() => {});
+        .catch((err) => {
+          this.$httpMessageState(err.response, '錯誤訊息');
+        });
     },
   },
   mounted() {

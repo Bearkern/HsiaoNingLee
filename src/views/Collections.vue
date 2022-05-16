@@ -18,7 +18,10 @@
     </ul>
   </div>
 
-  <div v-if="!collections.carts.length" class="container empty-collection mb-4">
+  <div
+    v-if="!collections.carts.length"
+    class="container empty-collection mb-4"
+  >
     <p class="d-inline-block">您目前沒有收藏任何畫作</p>
     <RouterLink class="btn btn-primary text-white" to="/paintings">前往收藏</RouterLink>
     <div class="bougainvillea mt-4"></div>
@@ -31,7 +34,11 @@
         <thead>
           <tr>
             <th>
-              <button type="button" class="btn btn-outline-danger" @click="removeCollections">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="removeCollections"
+              >
                 <i class="bi bi-folder-x"></i>
               </button>
             </th>
@@ -46,7 +53,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="collection in collections.carts" :key="collection.id">
+          <tr
+            v-for="collection in collections.carts"
+            :key="collection.id"
+          >
             <td>
               <button
                 type="button"
@@ -81,9 +91,14 @@
     <div class="col-lg-4 mb-4">
       <div class="collector-info">
         <h3>收藏者資訊</h3>
-        <Form ref="collectionForm" class="row mb-4" v-slot="{ errors }" @submit="sendCollections">
+        <Form
+          ref="collectionForm"
+          class="row mb-4"
+          v-slot="{ errors }"
+          @submit="sendCollections"
+        >
           <div class="col-12 col-md-4 col-lg-12 mb-2">
-            <label for="name" class="form-label"> 姓名<span class="text-danger">*</span> </label>
+            <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
             <Field
               id="name"
               name="姓名"
@@ -98,7 +113,7 @@
           </div>
 
           <div class="col-12 col-md-8 col-lg-12 mb-2">
-            <label for="email" class="form-label"> Email<span class="text-danger">*</span> </label>
+            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
             <Field
               id="email"
               name="email"
@@ -113,7 +128,7 @@
           </div>
 
           <div class="col-12 col-md-4 col-lg-12 mb-2">
-            <label for="tel" class="form-label"> 電話<span class="text-danger">*</span> </label>
+            <label for="tel" class="form-label">電話<span class="text-danger">*</span></label>
             <Field
               id="tel"
               name="電話"
@@ -122,13 +137,13 @@
               v-model="form.user.tel"
               :class="{ 'is-invalid': errors['電話'] }"
               placeholder="請輸入電話"
-              rules="required|min:8|max:10"
+              :rules="isPhone"
             />
             <ErrorMessage name="電話" class="invalid-feedback" />
           </div>
 
           <div class="col-12 col-md-8 col-lg-12 mb-2">
-            <label for="address" class="form-label"> 地址<span class="text-danger">*</span> </label>
+            <label for="address" class="form-label">地址<span class="text-danger">*</span></label>
             <Field
               id="address"
               name="地址"
@@ -238,6 +253,10 @@ export default {
           this.isLoading = false;
           this.$httpMessageState(err.response, '清空收藏');
         });
+    },
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/;
+      return phoneNumber.test(value) ? true : '需要正確的電話號碼';
     },
     sendCollections() {
       this.isLoading = true;

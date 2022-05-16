@@ -55,7 +55,7 @@
             class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1"
             target="_blank"
           >
-            <i class="bi bi-facebook fs-3"></i>
+            <i class="bi bi-facebook fs-4"></i>
           </a>
           或致電 0935-509498
         </li>
@@ -173,14 +173,14 @@ export default {
 }
 h2 {
   color: $kimberly-dark;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   border-bottom: 1px solid $martinique;
   padding-bottom: 5px;
   margin-bottom: 1rem;
 }
 h3 {
   color: $french-lilac-dark1;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding-bottom: 0.5rem;
   span {
     color: $kimberly-dark;
@@ -193,7 +193,6 @@ ul {
 p,
 li {
   color: $martinique-light2;
-  font-size: 1.25rem;
   list-style-image: url('../assets/images/favicon-16x16.png');
 }
 
@@ -205,6 +204,7 @@ li {
   }
   li {
     color: $white;
+    margin-bottom: 8px;
   }
 }
 
