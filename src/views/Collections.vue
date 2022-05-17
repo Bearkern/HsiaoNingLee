@@ -18,10 +18,7 @@
     </ul>
   </div>
 
-  <div
-    v-if="!collections.carts.length"
-    class="container empty-collection mb-4"
-  >
+  <div v-if="!collections.carts.length" class="container empty-collection mb-4">
     <p class="d-inline-block">您目前沒有收藏任何畫作</p>
     <RouterLink class="btn btn-primary text-white" to="/paintings">前往收藏</RouterLink>
     <div class="bougainvillea mt-4"></div>
@@ -34,11 +31,7 @@
         <thead>
           <tr>
             <th>
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                @click="removeCollections"
-              >
+              <button type="button" class="btn btn-outline-danger" @click="removeCollections">
                 <i class="bi bi-folder-x"></i>
               </button>
             </th>
@@ -53,10 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="collection in collections.carts"
-            :key="collection.id"
-          >
+          <tr v-for="collection in collections.carts" :key="collection.id">
             <td>
               <button
                 type="button"
@@ -68,7 +58,7 @@
                   class="spinner-border spinner-grow-sm"
                   v-if="state.paintingLoading === collection.id"
                 ></span>
-                <i class="bi bi-folder-minus"></i>
+                <i class="bi bi-folder-minus" v-if="state.paintingLoading !== collection.id"></i>
               </button>
             </td>
             <td>
@@ -91,12 +81,7 @@
     <div class="col-lg-4 mb-4">
       <div class="collector-info">
         <h3>收藏者資訊</h3>
-        <Form
-          ref="collectionForm"
-          class="row mb-4"
-          v-slot="{ errors }"
-          @submit="sendCollections"
-        >
+        <Form ref="collectionForm" class="row mb-4" v-slot="{ errors }" @submit="sendCollections">
           <div class="col-12 col-md-4 col-lg-12 mb-2">
             <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
             <Field
